@@ -1,23 +1,19 @@
 Package: spBPS
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Univariate and Multivariate Accelerated Spatial Modeling by Bayesian Predictive Stacking
+Version: 0.0-1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    c(person("Luca", "Presicce", , "l.presicce@campus.unimib.it", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0005-7062-3523")), 
+     person("Sudipto", "Banerjee", role="aut", email="sudipto@ucla.edu"))
+Maintainer: Luca Presicce <l.presicce@campus.unimib.it>
+Author: Luca Presicce [aut, cre], Sudipto Banerjee [aut]
+Description: This package provides the computational framework to fit the Accelerated spatial regression models following the approaach presented and detailed in "Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking" of Presicce L., and Banerjee S. (2024) <doi:10.48550/arXiv.0000.0000>. The functions in the package use mostly Rcpp-armadillo implementations, offering computationally efficient Bayesian geostatistical modeling, ready for high performance computing and parallel environments.
+Depends: R (>= 1.8.0)
+Imports: Rcpp, CVXR
+LinkingTo: mniw, mvnfast, Rcpp, RcppArmadillo
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-LinkingTo: 
-    mniw,
-    mvnfast,
-    Rcpp,
-    RcppArmadillo
-Imports: 
-    Rcpp
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Depends: 
-    CVXR

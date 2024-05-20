@@ -1,6 +1,6 @@
-# Accelerated Spatial Meta-Kriging (ASMK)
+# Univariate and Multivariate Accelerated Spatial Modeling by Bayesian Predictive Stacking
 
-This package provides the principal functions to perform accelerated meta-kriging, for both univariate and multivariate spatial regression. The package is used mostly within the novel working paper *"Bayesian Transfer Learning and Divide-Conquer Models for Massive Spatial Datasets" ([**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee, 2024+)"*. In order to guarantee the reproducibility of scientific results, in the [Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets](https://github.com/lucapresicce/Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets) repository are also available all the scripts of code used for simulations and data analysis presented in the work and its Supplemental material.
+This package provides the principal functions to perform accelerated modeling for univariate and multivariate spatial regressions. The package is used mostly within the novel working paper *"Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking" ([**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee, 2024+)"*. In order to guarantee the reproducibility of scientific results, in the [Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets](https://github.com/lucapresicce/Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets) repository are also available all the scripts of code used for simulations, data analysis, and results presented in the Manuscript and its Supplemental material.
 
 
 --------------------------------------------------------------------------------
@@ -19,9 +19,9 @@ if (!require(devtools)) {
   install.packages("devtools", dependencies = TRUE)
 }
 ```
-Once you have installed *devtools*, we can proceed. Let's install the `ASMK` package!
+Once you have installed *devtools*, we can proceed. Let's install the `spBPS` package!
 ```{r}
-devtools::install_github("lucapresicce/ASMK")
+devtools::install_github("lucapresicce/spBPS")
 ```
 Cool! You are ready to start, now you too could perform **_fast & feasible_** Bayesian geostatistical modeling!
 
@@ -34,9 +34,9 @@ Cool! You are ready to start, now you too could perform **_fast & feasible_** Ba
 
 | | |
 | :--- | :---: |
-| Author | Luca Presicce (l.presicce@campus.unimib.it) |
+| Author | Luca Presicce (l.presicce@campus.unimib.it) & Sudipto Banerjee (sudipto@ucla.edu) |
 | Maintainer | Luca Presicce (l.presicce@campus.unimib.it) |
-| Reference | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *"Bayesian Transfer Learning and Divide-Conquer Models for Massive Spatial Datasets"*  |
+| Reference | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *"Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking"*  |
 
 <!--
 Maintainer: l.presicce@campus.unimib.it
