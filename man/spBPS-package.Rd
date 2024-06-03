@@ -6,7 +6,7 @@
 \alias{spBPS-package}
 \title{spBPS: Univariate and Multivariate Accelerated Spatial Modeling by Bayesian Predictive Stacking}
 \description{
-This package provides the computational framework to fit the Accelerated spatial regression models following the approaach presented and detailed in "Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking" of Presicce L., and Banerjee S. (2024) \doi{10.48550/arXiv.0000.0000}. The functions in the package use mostly Rcpp-armadillo implementations, offering computationally efficient Bayesian geostatistical modeling, ready for high performance computing and parallel environments.
+This package provides the computational framework to fit the accelerated spatial regression models following the approach presented and detailed in "Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking" of Presicce L., and Banerjee S. (2024) \doi{10.48550/arXiv.0000.0000}. The functions in the package use mostly Rcpp-armadillo implementations, offering computationally efficient Bayesian geostatistical modeling, ready for high performance computing and parallel environments.
 }
 \author{
 \strong{Maintainer}: Luca Presicce \email{l.presicce@campus.unimib.it} (\href{https://orcid.org/0009-0005-7062-3523}{ORCID})
