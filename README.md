@@ -1,6 +1,6 @@
 # Univariate and Multivariate Accelerated Spatial Modeling by Bayesian Predictive Stacking
 
-This package provides the principal functions to perform accelerated modeling for univariate and multivariate spatial regressions. The package is used mostly within the novel working paper *"Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking" ([**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee, 2024+)"*. In order to guarantee the reproducibility of scientific results, in the [Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets](https://github.com/lucapresicce/Bayesian-Transfer-Learning-and-Divide-Conquer-Models-for-Massive-Spatial-Datasets) repository are also available all the scripts of code used for simulations, data analysis, and results presented in the Manuscript and its Supplemental material.
+This package provides the principal functions to perform accelerated modeling for univariate and multivariate spatial regressions. The package is used mostly within the novel working paper *"Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach" ([**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee, 2024+)"*. To guarantee the reproducibility of scientific results, in the [Bayesian-Transfer-Learning-for-GeoAI](https://github.com/lucapresicce/Bayesian-Transfer-Learning-for-GeoAI) repository are also available all the scripts of code used for simulations, data analysis, and results presented in the Manuscript and its Supplemental material.
 
 
 --------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ Cool! You are ready to start, now you too could perform **_fast & feasible_** Ba
 | :--- | :---: |
 | Author | Luca Presicce (l.presicce@campus.unimib.it) & Sudipto Banerjee (sudipto@ucla.edu) |
 | Maintainer | Luca Presicce (l.presicce@campus.unimib.it) |
-| Reference | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *"Building Artificially Intelligent Geostatistical Systems Using Bayesian Predictive Stacking"*  |
+| Reference | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *"Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach"*  |
 
 <!--
 Maintainer: l.presicce@campus.unimib.it
