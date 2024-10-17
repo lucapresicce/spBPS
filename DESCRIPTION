@@ -7,7 +7,7 @@ Authors@R:
      person("Sudipto", "Banerjee", role="aut", email="sudipto@ucla.edu"))
 Maintainer: Luca Presicce <l.presicce@campus.unimib.it>
 Author: Luca Presicce [aut, cre], Sudipto Banerjee [aut]
-Description: This package provides the computational framework to fit the accelerated spatial regression models following the approach presented and detailed in "Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach" of Presicce L., and Banerjee S. (2024) <doi:10.48550/arXiv.0000.0000>. The functions in the package use mostly Rcpp-armadillo implementations, offering computationally efficient Bayesian geostatistical modeling, ready for high performance computing and parallel environments.
+Description: This package provides the computational framework to fit the accelerated spatial regression models following the approach presented and detailed in "Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach" of Presicce L., and Banerjee S. (2024) <doi:10.48550/arXiv.2410.09504>. The functions in the package use mostly Rcpp-armadillo implementations, offering computationally efficient Bayesian geostatistical modeling, ready for high performance computing and parallel environments.
 Depends: R (>= 1.8.0)
 Imports: Rcpp, CVXR
 LinkingTo: mniw, mvnfast, Rcpp, RcppArmadillo
