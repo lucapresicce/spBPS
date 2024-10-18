@@ -29,3 +29,66 @@ BPS_post_MvT(data, X_u, priors, coords, crd_u, hyperpar, W, R)
 \description{
 Perform the BPS sampling from posterior and posterior predictive given a set of stacking weights
 }
+\examples{
+\dontrun{
+## Generate subsets of data
+n <- 100
+p <- 3
+q <- 2
+X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+
+## Select competitive set of values for hyperparameters
+alfa_seq <- c(0.7, 0.8, 0.9)
+phi_seq <- c(3, 4, 5)
+
+## Fit local models
+fit_list <- vector(length = 10, mode = "list")
+for (i in 1:10) {
+    Yi <- data_part$Y_list[[i]]
+    Xi <- data_part$X_list[[i]]
+    crd_i <- data_part$crd_list[[i]]
+    bps <- spBPS::BPS_weights_MvT(data = list(Y = Yi, X = Xi),
+                              priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+                                            V_r = diag(10, p),
+                                            Psi = diag(1, q),
+                                            nu = 3), coords = crd_i,
+                                            hyperpar = list(alpha = alfa_seq,
+                                                            phi = phi_seq),
+                                            K = 5)
+     w_hat <- bps$W
+     epd <- bps$epd
+     fit_list[i] <- list(epd, w_hat) }
+
+## Model combination weights between partitions using Bayesian Predictive Stacking
+comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+Wbps <- comb_bps$W
+W_list <- comb_bps$W_list
+
+## Perform posterior and posterior predictive sampling
+R <- 250
+subset_ind <- sample(1:K, R, T, Wbps)
+postsmp_and_pred <- vector(length = R, mode = "list")
+for (r in 1:R) {
+  ind_s <- subset_ind[r]
+  Ys <- data_part$Y_list[[ind_s]]
+  Xs <- data_part$X_list[[ind_s]]
+  crds <- data_part$crd_list[[ind_s]]
+  Ws <- W_list[[ind_s]]
+  result <- spBPS::BPS_post_MvT(data = list(Y = Ys, X = Xs), coords = crds,
+                                X_u = X_u, crd_u = crd_u,
+                                priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+                                              V_r = diag(10, p),
+                                              Psi = diag(1, q),
+                                              nu = 3),
+                                              hyperpar = list(alpha = alfa_seq,
+                                                              phi = phi_seq),
+                                              W = Ws, R = 1)
+
+  postsmp_and_pred[r] <- result}
+
+}
+
+}

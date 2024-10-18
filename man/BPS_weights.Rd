@@ -23,3 +23,28 @@ BPS_weights(data, priors, coords, hyperpar, K)
 \description{
 Compute the BPS weights by convex optimization
 }
+\examples{
+\dontrun{
+## Generate subsets of data
+n <- 100
+p <- 3
+X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+Y <- matrix(rnorm(n), nrow = n)
+crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+
+## Select competitive set of values for hyperparameters
+delta_seq <- c(0.1, 0.2, 0.3)
+phi_seq <- c(3, 4, 5)
+
+## Perform Bayesian Predictive Stacking within subsets
+bps <- spBPS::BPS_weights(data = list(Y = Y, X = X),
+                               priors = list(mu_b = matrix(rep(0, p)),
+                                             V_b = diag(10, p),
+                                             a = 2,
+                                             b = 2), coords = crd,
+                                             hyperpar = list(delta = delta_seq,
+                                                             phi = phi_seq),
+                                             K = 5)
+}
+
+}

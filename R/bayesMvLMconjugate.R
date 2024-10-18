@@ -13,6 +13,29 @@
 #' @return Sigma_samples [array] of posterior samples for \eqn{\Sigma}
 #'
 #' @importFrom mniw rMNorm riwish
+#' @importFrom utils txtProgressBar setTxtProgressBar
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#'
+#' ## Prior parameters
+#' mu_B <- matrix(0, p, q)
+#' V_B <- diag(10, p)
+#' nu <- 3
+#' Psi <- diag(q)
+#'
+#' ## Samples from posteriors
+#' n_iter <- 1000
+#' burn_in <- 500
+#' set.seed(1234)
+#' samples <- spBPS::bayesMvLMconjugate(Y, X, mu_B, V_B, nu, Psi, n_iter, burn_in)
+#' }
 #'
 #' @export
 bayesMvLMconjugate <- function(Y, X, mu_B, V_B, nu, Psi, n_iter = 1000, burn_in = 500) {
@@ -65,6 +88,39 @@ bayesMvLMconjugate <- function(Y, X, mu_B, V_B, nu, Psi, n_iter = 1000, burn_in 
 #' @return Y_pred_samples [array] of posterior predictive sample for response matrix Y
 #'
 #' @importFrom mniw rMNorm
+#' @importFrom utils txtProgressBar setTxtProgressBar
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#'
+#' ## Prior parameters
+#' mu_B <- matrix(0, p, q)
+#' V_B <- diag(10, p)
+#' nu <- 3
+#' Psi <- diag(q)
+#'
+#' ## Samples from posteriors
+#' n_iter <- 1000
+#' burn_in <- 500
+#' set.seed(1234)
+#' samples <- spBPS::bayesMvLMconjugate(Y, X, mu_B, V_B, nu, Psi, n_iter, burn_in)
+#'
+#' ## Extract posterior samples
+#' B_samples <- samples$B_samples
+#' Sigma_samples <- samples$Sigma_samples
+#'
+#' ## Samples from predictive posterior (based posterior samples)
+#' m <- 50
+#' X_new <- matrix(rnorm(m*p), nrow = m, ncol = p)
+#' pred <- spBPS::pred_bayesMvLMconjugate(x_u, B_samples, Sigma_samples)
+#'
+#' }
 #'
 #' @export
 pred_bayesMvLMconjugate <- function(X_new, B_samples, Sigma_samples) {

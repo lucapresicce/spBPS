@@ -21,3 +21,36 @@ Y_pred_samples \link{array} of posterior predictive sample for response matrix Y
 \description{
 Predictive sampler for Conjugate Bayesian Multivariate Linear Models
 }
+\examples{
+\dontrun{
+## Generate subsets of data
+n <- 100
+p <- 3
+q <- 2
+Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+
+## Prior parameters
+mu_B <- matrix(0, p, q)
+V_B <- diag(10, p)
+nu <- 3
+Psi <- diag(q)
+
+## Samples from posteriors
+n_iter <- 1000
+burn_in <- 500
+set.seed(1234)
+samples <- spBPS::bayesMvLMconjugate(Y, X, mu_B, V_B, nu, Psi, n_iter, burn_in)
+
+## Extract posterior samples
+B_samples <- samples$B_samples
+Sigma_samples <- samples$Sigma_samples
+
+## Samples from predictive posterior (based posterior samples)
+m <- 50
+X_new <- matrix(rnorm(m*p), nrow = m, ncol = p)
+pred <- spBPS::pred_bayesMvLMconjugate(x_u, B_samples, Sigma_samples)
+
+}
+
+}

@@ -18,6 +18,44 @@ CVXR_opt <- function(scores) {
 #' @param rp [double] percentage of observations to take into account for optimization (\code{default=1})
 #'
 #' @return [matrix] posterior predictive density evaluations (each columns represent a different model)
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n), nrow = n, ncol = 1)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' delta_seq <- c(0.1, 0.2, 0.3)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Perform Bayesian Predictive Stacking within subsets
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     p <- ncol(Xi)
+#'     bps <- spBPS::BPS_weights(data = list(Y = Yi, X = Xi),
+#'                                priors = list(mu_b = matrix(rep(0, p)),
+#'                                              V_b = diag(10, p),
+#'                                              a = 2,
+#'                                              b = 2), coords = crd_i,
+#'                                              hyperpar = list(delta = delta_seq,
+#'                                                              phi = phi_seq),
+#'                                              K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Combination weights between partitions using Bayesian Predictive Stacking
+#' comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+#' }
+#'
 #' @export
 BPS_combine <- function(fit_list, K, rp) {
     .Call(`_spBPS_BPS_combine`, fit_list, K, rp)
@@ -28,6 +66,45 @@ BPS_combine <- function(fit_list, K, rp) {
 #' @param fit_list [list] K fitted model outputs composed by two elements each: first named \eqn{epd}, second named \eqn{W}
 #'
 #' @return [matrix] posterior predictive density evaluations (each columns represent a different model)
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' delta_seq <- c(0.1, 0.2, 0.3)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Perform Bayesian Predictive Stacking within subsets
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     p <- ncol(Xi)
+#'     bps <- spBPS::BPS_weights(data = list(Y = Yi, X = Xi),
+#'                                priors = list(mu_b = matrix(rep(0, p)),
+#'                                              V_b = diag(10, p),
+#'                                              a = 2,
+#'                                              b = 2), coords = crd_i,
+#'                                              hyperpar = list(delta = delta_seq,
+#'                                                              phi = phi_seq),
+#'                                              K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Combination weights between partitions using Pseudo Bayesian Model Averaging
+#' comb_bps <- BPS_PseudoBMA(fit_list = fit_list)
+#' }
+#'
 #' @export
 BPS_PseudoBMA <- function(fit_list) {
     .Call(`_spBPS_BPS_PseudoBMA`, fit_list)
@@ -174,6 +251,31 @@ models_dens <- function(data, priors, coords, hyperpar, useKCV, K) {
 #' @param K [integer] number of folds
 #'
 #' @return [matrix] posterior predictive density evaluations (each columns represent a different model)
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n), nrow = n)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' delta_seq <- c(0.1, 0.2, 0.3)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Perform Bayesian Predictive Stacking within subsets
+#' bps <- spBPS::BPS_weights(data = list(Y = Y, X = X),
+#'                                priors = list(mu_b = matrix(rep(0, p)),
+#'                                              V_b = diag(10, p),
+#'                                              a = 2,
+#'                                              b = 2), coords = crd,
+#'                                              hyperpar = list(delta = delta_seq,
+#'                                                              phi = phi_seq),
+#'                                              K = 5)
+#' }
+#'
 #' @export
 BPS_weights <- function(data, priors, coords, hyperpar, K) {
     .Call(`_spBPS_BPS_weights`, data, priors, coords, hyperpar, K)
@@ -191,6 +293,70 @@ BPS_weights <- function(data, priors, coords, hyperpar, K) {
 #' @param R [integer] number of desired samples
 #'
 #' @return [list] BPS posterior predictive samples
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n), nrow = n, ncol = 1)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competetive set of values for hyperparameters
+#' delta_seq <- c(0.1, 0.2, 0.3)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Fit local models
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     p <- ncol(Xi)
+#'     bps <- spBPS::BPS_weights(data = list(Y = Yi, X = Xi),
+#'                                priors = list(mu_b = matrix(rep(0, p)),
+#'                                              V_b = diag(10, p),
+#'                                              a = 2,
+#'                                              b = 2), coords = crd_i,
+#'                                              hyperpar = list(delta = delta_seq,
+#'                                                              phi = phi_seq),
+#'                                              K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Model combination weights between partitions using Bayesian Predictive Stacking
+#' comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+#' comb_bps <- BPS_combine(obj_fit, K, 1)
+#' Wbps <- comb_bps$W
+#' W_list <- comb_bps$W_list
+#'
+#' ## Perform posterior predictive sampling
+#' R <- 250
+#' subset_ind <- sample(1:K, R, T, Wbps)
+#' predictions <- vector(length = R, mode = "list")
+#' for (r in 1:R) {
+#'   ind_s <- subset_ind[r]
+#'   Ys <- matrix(data_part$Y_list[[ind_s]])
+#'   Xs <- data_part$X_list[[ind_s]]
+#'   crds <- data_part$crd_list[[ind_s]]
+#'   Ws <- W_list[[ind_s]]
+#'   result <- spBPS::BPS_pred(data = list(Y = Ys, X = Xs), coords = crds,
+#'                             X_u = X_u, crd_u = crd_u,
+#'                             priors = list(mu_b = matrix(rep(0, p)),
+#'                                           V_b = diag(10, p),
+#'                                           a = 2,
+#'                                           b = 2),
+#'                                           hyperpar = list(delta = delta_seq,
+#'                                                           phi = phi_seq),
+#'                                           W = Ws, R = 1)
+#'
+#'   predictions[r] <- result}
+#'
+#' }
+#'
 #' @export
 BPS_pred <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
     .Call(`_spBPS_BPS_pred`, data, X_u, priors, coords, crd_u, hyperpar, W, R)
@@ -208,6 +374,70 @@ BPS_pred <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
 #' @param R [integer] number of desired samples
 #'
 #' @return [list] BPS posterior predictive samples
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n), nrow = n, ncol = 1)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competetive set of values for hyperparameters
+#' delta_seq <- c(0.1, 0.2, 0.3)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Fit local models
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     p <- ncol(Xi)
+#'     bps <- spBPS::BPS_weights(data = list(Y = Yi, X = Xi),
+#'                                priors = list(mu_b = matrix(rep(0, p)),
+#'                                              V_b = diag(10, p),
+#'                                              a = 2,
+#'                                              b = 2), coords = crd_i,
+#'                                              hyperpar = list(delta = delta_seq,
+#'                                                              phi = phi_seq),
+#'                                              K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Model combination weights between partitions using Bayesian Predictive Stacking
+#' comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+#' comb_bps <- BPS_combine(obj_fit, K, 1)
+#' Wbps <- comb_bps$W
+#' W_list <- comb_bps$W_list
+#'
+#' ## Perform posterior and posterior predictive sampling
+#' R <- 250
+#' subset_ind <- sample(1:K, R, T, Wbps)
+#' postsmp_and_pred <- vector(length = R, mode = "list")
+#' for (r in 1:R) {
+#'   ind_s <- subset_ind[r]
+#'   Ys <- matrix(data_part$Y_list[[ind_s]])
+#'   Xs <- data_part$X_list[[ind_s]]
+#'   crds <- data_part$crd_list[[ind_s]]
+#'   Ws <- W_list[[ind_s]]
+#'   result <- spBPS::BPS_post(data = list(Y = Ys, X = Xs), coords = crds,
+#'                             X_u = X_u, crd_u = crd_u,
+#'                             priors = list(mu_b = matrix(rep(0, p)),
+#'                                           V_b = diag(10, p),
+#'                                           a = 2,
+#'                                           b = 2),
+#'                                           hyperpar = list(delta = delta_seq,
+#'                                                           phi = phi_seq),
+#'                                           W = Ws, R = 1)
+#'
+#'   postsmp_and_pred[r] <- result}
+#'
+#' }
+#'
 #' @export
 BPS_post <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
     .Call(`_spBPS_BPS_post`, data, X_u, priors, coords, crd_u, hyperpar, W, R)
@@ -223,7 +453,7 @@ BPS_post <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
 #' @param R [integer] number of desired samples
 #'
 #' @return [matrix] BPS posterior samples
-#' @export
+#'
 BPS_postdraws <- function(data, priors, coords, hyperpar, W, R) {
     .Call(`_spBPS_BPS_postdraws`, data, priors, coords, hyperpar, W, R)
 }
@@ -387,6 +617,32 @@ models_dens_MvT <- function(data, priors, coords, hyperpar, useKCV, K) {
 #' @param K [integer] number of folds
 #'
 #' @return [matrix] posterior predictive density evaluations (each columns represent a different model)
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' alfa_seq <- c(0.7, 0.8, 0.9)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Perform Bayesian Predictive Stacking within subsets
+#' bps <- spBPS::BPS_weights_MvT(data = list(Y = Y, X = X),
+#'                               priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+#'                                             V_r = diag(10, p),
+#'                                             Psi = diag(1, q),
+#'                                             nu = 3), coords = crd,
+#'                                             hyperpar = list(alpha = alfa_seq,
+#'                                                             phi = phi_seq),
+#'                                             K = 5)
+#' }
+#'
 #' @export
 BPS_weights_MvT <- function(data, priors, coords, hyperpar, K) {
     .Call(`_spBPS_BPS_weights_MvT`, data, priors, coords, hyperpar, K)
@@ -404,6 +660,69 @@ BPS_weights_MvT <- function(data, priors, coords, hyperpar, K) {
 #' @param R [integer] number of desired samples
 #'
 #' @return [list] BPS posterior predictive samples
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' alfa_seq <- c(0.7, 0.8, 0.9)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Fit local models
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     bps <- spBPS::BPS_weights_MvT(data = list(Y = Yi, X = Xi),
+#'                               priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+#'                                             V_r = diag(10, p),
+#'                                             Psi = diag(1, q),
+#'                                             nu = 3), coords = crd_i,
+#'                                             hyperpar = list(alpha = alfa_seq,
+#'                                                             phi = phi_seq),
+#'                                             K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Model combination weights between partitions using Bayesian Predictive Stacking
+#' comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+#' Wbps <- comb_bps$W
+#' W_list <- comb_bps$W_list
+#'
+#' ## Perform posterior predictive sampling
+#' R <- 250
+#' subset_ind <- sample(1:K, R, T, Wbps)
+#' predictions <- vector(length = R, mode = "list")
+#' for (r in 1:R) {
+#'   ind_s <- subset_ind[r]
+#'   Ys <- data_part$Y_list[[ind_s]]
+#'   Xs <- data_part$X_list[[ind_s]]
+#'   crds <- data_part$crd_list[[ind_s]]
+#'   Ws <- W_list[[ind_s]]
+#'   result <- spBPS::BPS_pred_MvT(data = list(Y = Ys, X = Xs), coords = crds,
+#'                                 X_u = X_u, crd_u = crd_u,
+#'                                 priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+#'                                               V_r = diag(10, p),
+#'                                               Psi = diag(1, q),
+#'                                               nu = 3),
+#'                                               hyperpar = list(alpha = alfa_seq,
+#'                                                               phi = phi_seq),
+#'                                               W = Ws, R = 1)
+#'
+#'   predictions[r] <- result}
+#'
+#' }
+#'
 #' @export
 BPS_pred_MvT <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
     .Call(`_spBPS_BPS_pred_MvT`, data, X_u, priors, coords, crd_u, hyperpar, W, R)
@@ -421,6 +740,69 @@ BPS_pred_MvT <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
 #' @param R [integer] number of desired samples
 #'
 #' @return [list] BPS posterior predictive samples
+#'
+#' @examples
+#' \dontrun{
+#' ## Generate subsets of data
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#'
+#' ## Select competitive set of values for hyperparameters
+#' alfa_seq <- c(0.7, 0.8, 0.9)
+#' phi_seq <- c(3, 4, 5)
+#'
+#' ## Fit local models
+#' fit_list <- vector(length = 10, mode = "list")
+#' for (i in 1:10) {
+#'     Yi <- data_part$Y_list[[i]]
+#'     Xi <- data_part$X_list[[i]]
+#'     crd_i <- data_part$crd_list[[i]]
+#'     bps <- spBPS::BPS_weights_MvT(data = list(Y = Yi, X = Xi),
+#'                               priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+#'                                             V_r = diag(10, p),
+#'                                             Psi = diag(1, q),
+#'                                             nu = 3), coords = crd_i,
+#'                                             hyperpar = list(alpha = alfa_seq,
+#'                                                             phi = phi_seq),
+#'                                             K = 5)
+#'      w_hat <- bps$W
+#'      epd <- bps$epd
+#'      fit_list[i] <- list(epd, w_hat) }
+#'
+#' ## Model combination weights between partitions using Bayesian Predictive Stacking
+#' comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
+#' Wbps <- comb_bps$W
+#' W_list <- comb_bps$W_list
+#'
+#' ## Perform posterior and posterior predictive sampling
+#' R <- 250
+#' subset_ind <- sample(1:K, R, T, Wbps)
+#' postsmp_and_pred <- vector(length = R, mode = "list")
+#' for (r in 1:R) {
+#'   ind_s <- subset_ind[r]
+#'   Ys <- data_part$Y_list[[ind_s]]
+#'   Xs <- data_part$X_list[[ind_s]]
+#'   crds <- data_part$crd_list[[ind_s]]
+#'   Ws <- W_list[[ind_s]]
+#'   result <- spBPS::BPS_post_MvT(data = list(Y = Ys, X = Xs), coords = crds,
+#'                                 X_u = X_u, crd_u = crd_u,
+#'                                 priors = list(mu_B = matrix(0, nrow = p, ncol = q),
+#'                                               V_r = diag(10, p),
+#'                                               Psi = diag(1, q),
+#'                                               nu = 3),
+#'                                               hyperpar = list(alpha = alfa_seq,
+#'                                                               phi = phi_seq),
+#'                                               W = Ws, R = 1)
+#'
+#'   postsmp_and_pred[r] <- result}
+#'
+#' }
+#'
 #' @export
 BPS_post_MvT <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
     .Call(`_spBPS_BPS_post_MvT`, data, X_u, priors, coords, crd_u, hyperpar, W, R)
@@ -437,7 +819,7 @@ BPS_post_MvT <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R) {
 #' @param par if \code{TRUE} only \eqn{\beta} and \eqn{\Sigma} are sampled (\eqn{\omega} is omitted)
 #'
 #' @return [matrix] BPS posterior samples
-#' @export
+#'
 BPS_postdraws_MvT <- function(data, priors, coords, hyperpar, W, R, par) {
     .Call(`_spBPS_BPS_postdraws_MvT`, data, priors, coords, hyperpar, W, R, par)
 }
@@ -447,6 +829,16 @@ BPS_postdraws_MvT <- function(data, priors, coords, hyperpar, W, R, par) {
 #' @param X [matrix] (tipically of \eqn{N} coordindates on \eqn{\mathbb{R}^2} )
 #'
 #' @return [matrix] distance matrix of the elements of \eqn{X}
+#'
+#' @examples
+#' \dontrun{
+#' ## Compute the Distance matrix of dimension (n x n)
+#' n <- 100
+#' p <- 2
+#' X <- matrix(runif(n*p), nrow = n, ncol = p)
+#' distance.matrix <- arma_dist(X)
+#' }
+#'
 #' @export
 arma_dist <- function(X) {
     .Call(`_spBPS_arma_dist`, X)
@@ -458,6 +850,15 @@ arma_dist <- function(X) {
 #' @param y [vector] second vector of numeric elements
 #'
 #' @return [matrix] expanded grid of combinations
+#'
+#' @examples
+#' \dontrun{
+#' ## Create a matrix from all combination of vectors
+#' x <- seq(0, 10, length.out = 100
+#' y <- seq(-1, 1, length.out = 20)
+#' grid <- expand_grid_cpp(x = x, y = y)
+#' }
+#'
 #' @export
 expand_grid_cpp <- function(x, y) {
     .Call(`_spBPS_expand_grid_cpp`, x, y)
@@ -481,6 +882,19 @@ sample_index <- function(size, length, p) {
 #' @param K [integer] number of desired subsets
 #'
 #' @return [list] subsets of data, and the set of indexes
+#'
+#' @examples
+#' \dontrun{
+#' ## Create a list of K random subsets given a list with Y, X, and crd
+#' n <- 100
+#' p <- 3
+#' q <- 2
+#' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+#' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+#' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
+#' subsets <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
+#' }
+#'
 #' @export
 subset_data <- function(data, K) {
     .Call(`_spBPS_subset_data`, data, K)
@@ -491,6 +905,15 @@ subset_data <- function(data, K) {
 #' @param mat [matrix] not-symmetric matrix
 #'
 #' @return [matrix] symmetric matrix (lower triangular of \code{mat} is used)
+#'
+#' @examples
+#' \dontrun{
+#' ## Force matrix to be symmetric (avoiding numerical problems)
+#' n <- 100
+#' X <- matrix(runif(n*n), nrow = n, ncol = n)
+#' X <- forceSymmetry_cpp(mat = X)
+#' }
+#'
 #' @export
 forceSymmetry_cpp <- function(mat) {
     .Call(`_spBPS_forceSymmetry_cpp`, mat)
