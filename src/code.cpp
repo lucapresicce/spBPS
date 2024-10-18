@@ -2175,8 +2175,7 @@ List BPS_postdraws_MvT(const List& data, const List& priors, const arma::mat& co
     List poster = fit_cpp_MvT(data, priors, coords, hmod);
 
     // posterior draws
-    // bool par = true;
-    List post = post_draws_MvT(poster, 1, par = par, p = p);
+    List post = post_draws_MvT(poster, 1, par, p);
 
     Draws(r) =  post;
 
