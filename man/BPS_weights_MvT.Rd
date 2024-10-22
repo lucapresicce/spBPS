@@ -24,12 +24,12 @@ BPS_weights_MvT(data, priors, coords, hyperpar, K)
 Compute the BPS weights by convex optimization
 }
 \examples{
-\dontrun{
+\donttest{
 ## Generate subsets of data
 n <- 100
 p <- 3
 q <- 2
-X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+X <- matrix(rnorm(n*p), nrow = n, ncol = p)
 Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
 crd <- matrix(runif(n*2), nrow = n, ncol = 2)
 

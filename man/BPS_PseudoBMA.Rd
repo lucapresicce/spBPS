@@ -16,13 +16,12 @@ BPS_PseudoBMA(fit_list)
 Combine subset models wiht Pseudo-BMA
 }
 \examples{
-\dontrun{
+\donttest{
 ## Generate subsets of data
 n <- 100
 p <- 3
-q <- 2
-X <- matrix(rnrom(n*p), nrow = n, ncol = p)
-Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
+X <- matrix(rnorm(n*p), nrow = n, ncol = p)
+Y <- matrix(rnorm(n), nrow = n, ncol = 1)
 crd <- matrix(runif(n*2), nrow = n, ncol = 2)
 data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
 
@@ -47,7 +46,7 @@ for (i in 1:10) {
                                              K = 5)
      w_hat <- bps$W
      epd <- bps$epd
-     fit_list[i] <- list(epd, w_hat) }
+     fit_list[[i]] <- list(epd, w_hat) }
 
 ## Combination weights between partitions using Pseudo Bayesian Model Averaging
 comb_bps <- BPS_PseudoBMA(fit_list = fit_list)

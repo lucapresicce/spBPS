@@ -22,13 +22,12 @@ Y_pred_samples \link{array} of posterior predictive sample for response matrix Y
 Predictive sampler for Conjugate Bayesian Multivariate Linear Models
 }
 \examples{
-\dontrun{
-## Generate subsets of data
+## Generate data
 n <- 100
 p <- 3
 q <- 2
 Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
-X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+X <- matrix(rnorm(n*p), nrow = n, ncol = p)
 
 ## Prior parameters
 mu_B <- matrix(0, p, q)
@@ -49,8 +48,6 @@ Sigma_samples <- samples$Sigma_samples
 ## Samples from predictive posterior (based posterior samples)
 m <- 50
 X_new <- matrix(rnorm(m*p), nrow = m, ncol = p)
-pred <- spBPS::pred_bayesMvLMconjugate(x_u, B_samples, Sigma_samples)
-
-}
+pred <- spBPS::pred_bayesMvLMconjugate(X_new, B_samples, Sigma_samples)
 
 }

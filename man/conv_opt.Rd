@@ -15,3 +15,13 @@ W \link{matrix} of Bayesian Predictive Stacking weights for the K models conside
 \description{
 Solver for Bayesian Predictive Stacking of Predictive densities convex optimization problem
 }
+\examples{
+## Generate (randomly) K predictive scores for n observations
+n <- 50
+K <- 5
+scores <- matrix(runif(n*K), nrow = n, ncol = K)
+
+## Find Bayesian Predictive Stacking weights
+opt_weights <- conv_opt(scores)
+
+}

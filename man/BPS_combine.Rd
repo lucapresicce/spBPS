@@ -20,11 +20,11 @@ BPS_combine(fit_list, K, rp)
 Combine subset models wiht BPS
 }
 \examples{
-\dontrun{
+\donttest{
 ## Generate subsets of data
 n <- 100
 p <- 3
-X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+X <- matrix(rnorm(n*p), nrow = n, ncol = p)
 Y <- matrix(rnorm(n), nrow = n, ncol = 1)
 crd <- matrix(runif(n*2), nrow = n, ncol = 2)
 data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
@@ -50,7 +50,7 @@ for (i in 1:10) {
                                              K = 5)
      w_hat <- bps$W
      epd <- bps$epd
-     fit_list[i] <- list(epd, w_hat) }
+     fit_list[[i]] <- list(epd, w_hat) }
 
 ## Combination weights between partitions using Bayesian Predictive Stacking
 comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)

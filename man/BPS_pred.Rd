@@ -30,11 +30,11 @@ BPS_pred(data, X_u, priors, coords, crd_u, hyperpar, W, R)
 Compute the BPS spatial prediction given a set of stacking weights
 }
 \examples{
-\dontrun{
+\donttest{
 ## Generate subsets of data
 n <- 100
 p <- 3
-X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+X <- matrix(rnorm(n*p), nrow = n, ncol = p)
 Y <- matrix(rnorm(n), nrow = n, ncol = 1)
 crd <- matrix(runif(n*2), nrow = n, ncol = 2)
 data_part <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
@@ -60,17 +60,21 @@ for (i in 1:10) {
                                              K = 5)
      w_hat <- bps$W
      epd <- bps$epd
-     fit_list[i] <- list(epd, w_hat) }
+     fit_list[[i]] <- list(epd, w_hat) }
 
 ## Model combination weights between partitions using Bayesian Predictive Stacking
 comb_bps <- BPS_combine(fit_list = fit_list, K = 10, rp = 1)
-comb_bps <- BPS_combine(obj_fit, K, 1)
 Wbps <- comb_bps$W
 W_list <- comb_bps$W_list
 
+## Generate prediction points
+m <- 50
+X_new <- matrix(rnorm(m*p), nrow = m, ncol = p)
+crd_new <- matrix(runif(m*2), nrow = m, ncol = 2)
+
 ## Perform posterior predictive sampling
 R <- 250
-subset_ind <- sample(1:K, R, T, Wbps)
+subset_ind <- sample(1:10, R, TRUE, Wbps)
 predictions <- vector(length = R, mode = "list")
 for (r in 1:R) {
   ind_s <- subset_ind[r]
@@ -79,7 +83,7 @@ for (r in 1:R) {
   crds <- data_part$crd_list[[ind_s]]
   Ws <- W_list[[ind_s]]
   result <- spBPS::BPS_pred(data = list(Y = Ys, X = Xs), coords = crds,
-                            X_u = X_u, crd_u = crd_u,
+                            X_u = X_new, crd_u = crd_new,
                             priors = list(mu_b = matrix(rep(0, p)),
                                           V_b = diag(10, p),
                                           a = 2,
@@ -88,7 +92,7 @@ for (r in 1:R) {
                                                           phi = phi_seq),
                                           W = Ws, R = 1)
 
-  predictions[r] <- result}
+  predictions[[r]] <- result}
 
 }
 

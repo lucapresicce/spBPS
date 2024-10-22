@@ -16,11 +16,9 @@ forceSymmetry_cpp(mat)
 Function to subset data for meta-analysis
 }
 \examples{
-\dontrun{
 ## Force matrix to be symmetric (avoiding numerical problems)
-n <- 100
+n <- 4
 X <- matrix(runif(n*n), nrow = n, ncol = n)
 X <- forceSymmetry_cpp(mat = X)
-}
 
 }
