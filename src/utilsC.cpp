@@ -21,13 +21,11 @@ using namespace arma;
 //' @return [matrix] distance matrix of the elements of \eqn{X}
 //'
 //' @examples
-//' \dontrun{
 //' ## Compute the Distance matrix of dimension (n x n)
 //' n <- 100
 //' p <- 2
 //' X <- matrix(runif(n*p), nrow = n, ncol = p)
 //' distance.matrix <- arma_dist(X)
-//' }
 //'
 //' @export
 // [[Rcpp::export(name = "arma_dist")]]
@@ -52,12 +50,10 @@ arma::mat arma_dist(const arma::mat & X){
 //' @return [matrix] expanded grid of combinations
 //'
 //' @examples
-//' \dontrun{
 //' ## Create a matrix from all combination of vectors
-//' x <- seq(0, 10, length.out = 100
+//' x <- seq(0, 10, length.out = 100)
 //' y <- seq(-1, 1, length.out = 20)
 //' grid <- expand_grid_cpp(x = x, y = y)
-//' }
 //'
 //' @export
 // [[Rcpp::export]]
@@ -105,16 +101,14 @@ arma::uvec sample_index(const int& size, const int& length, const arma::vec& p){
 //' @return [list] subsets of data, and the set of indexes
 //'
 //' @examples
-//' \dontrun{
 //' ## Create a list of K random subsets given a list with Y, X, and crd
 //' n <- 100
 //' p <- 3
 //' q <- 2
-//' X <- matrix(rnrom(n*p), nrow = n, ncol = p)
+//' X <- matrix(rnorm(n*p), nrow = n, ncol = p)
 //' Y <- matrix(rnorm(n*q), nrow = n, ncol = q)
 //' crd <- matrix(runif(n*2), nrow = n, ncol = 2)
 //' subsets <- subset_data(data = list(Y = Y, X = X, crd = crd), K = 10)
-//' }
 //'
 //' @export
 // [[Rcpp::export]]
@@ -164,12 +158,10 @@ List subset_data(const List& data, int K) {
 //' @return [matrix] symmetric matrix (lower triangular of \code{mat} is used)
 //'
 //' @examples
-//' \dontrun{
 //' ## Force matrix to be symmetric (avoiding numerical problems)
-//' n <- 100
+//' n <- 4
 //' X <- matrix(runif(n*n), nrow = n, ncol = n)
 //' X <- forceSymmetry_cpp(mat = X)
-//' }
 //'
 //' @export
 // [[Rcpp::export]]

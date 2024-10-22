@@ -2,7 +2,7 @@
 title: "Double Bayesian Predictive Stacking for (univariate) Spatial Analysis - Tutotial"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Double Bayesian Predictive Stacking for Spatial Analysis - Tutotial}
+  %\VignetteIndexEntry{Double Bayesian Predictive Stacking for (univariate) Spatial Analysis - Tutotial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: references.bib
@@ -19,19 +19,6 @@ We provide a brief tutorial of the `spBPS` package. Here we shows the implementa
 
 ```{r setup}
 library(spBPS)
-```
-
-```{r, echo=FALSE, include=FALSE, warning=FALSE, message=F}
-if (!require("foreach")) { install.packages("foreach") }
-if (!require("parallel")) { install.packages("parallel") }
-if (!require("doParallel")) { install.packages("doParallel") }
-if (!require("tictoc")) { install.packages("tictoc") }
-if (!require("MBA")) { install.packages("MBA") }
-if (!require("classInt")) { install.packages("classInt") }
-if (!require("RColorBrewer")) { install.packages("RColorBrewer") }
-if (!require("sp")) { install.packages("sp") }
-if (!require("fields")) { install.packages("fields") }
-if (!require("mvnfast")) { install.packages("mvnfast") }
 ```
 
 ### Working packages
@@ -223,7 +210,7 @@ cat("RMSPE for Response:", round(rmspe_Y, 3), "\n")
 
 
 ### Plot results
-```{r, echo=F, fig.dim = c(7.25, 4)}
+```{r, echo=F, fig.dim = c(7.25, 4), warning=F, error=F}
 # True spatial process surface interpolation
 h <- 12
 surf.W <- MBA::mba.surf(cbind(crd_s, W), no.X = 500, no.Y = 500,
@@ -246,7 +233,9 @@ zlimp <- range(surf.Wp$z)
 iwp <- as.image.SpatialGridDataFrame(surf.Wp)
 
 # Plotting
+oldpar <- par()
 par(mfrow = c(1, 2))
+
 plot(crd, type="n", cex=0.5, xlim=xlim, axes=FALSE, ylab="Northing", xlab="Easting",
      main="Spatial process")
 axis(2, las=1)
@@ -259,11 +248,12 @@ mtext(side = 3, paste("RMSPE :", round(rmspe_W, 3)))
 axis(2, las=1)
 axis(1)
 image.plot(iwp, add=TRUE, col=rev(col.pal(length(surf.brks)-1)), zlim=zlimp)
-par(mfrow = c(1, 1))
+
+par(oldpar)
 ```
 
 
-```{r, echo=F, fig.dim = c(7.25, 4)}
+```{r, echo=F, fig.dim = c(7.25, 4), warning=F, message=F}
 # True response surface interpolation
 h <- 12
 surf.Y <- MBA::mba.surf(cbind(crd_s, Y), no.X = 500, no.Y = 500,
@@ -286,7 +276,9 @@ zlimp <- range(surf.Yp$z)
 iyp <- as.image.SpatialGridDataFrame(surf.Yp)
 
 # Plotting
+oldpar <- par()
 par(mfrow = c(1, 2))
+
 plot(crd, type="n", cex=0.5, xlim=xlim, axes=FALSE, ylab="Northing", xlab="Easting",
      main="Response")
 axis(2, las=1)
@@ -299,7 +291,8 @@ mtext(side = 3, paste("RMSPE :", round(rmspe_Y, 3)))
 axis(2, las=1)
 axis(1)
 image.plot(iyp, add=TRUE, col=rev(col.pal(length(surf.brks)-1)), zlim=zlimp)
-par(mfrow = c(1, 1))
+
+par(oldpar)
 ```
 ------
 

@@ -6,6 +6,15 @@
 #'
 #' @importFrom CVXR Variable Maximize Problem solve
 #'
+#' @examples
+#' ## Generate (randomly) K predictive scores for n observations
+#' n <- 50
+#' K <- 5
+#' scores <- matrix(runif(n*K), nrow = n, ncol = K)
+#'
+#' ## Find Bayesian Predictive Stacking weights
+#' opt_weights <- conv_opt(scores)
+#'
 #' @export
 conv_opt <- function(scores) {
   # library(CVXR, quietly = T)
