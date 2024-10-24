@@ -210,7 +210,7 @@ cat("RMSPE for Response:", round(rmspe_Y, 3), "\n")
 
 
 ### Plot results
-```{r, echo=F, fig.dim = c(7.25, 4), warning=F, error=F}
+```{r, echo=F, fig.dim = c(7.25, 4)}
 # True spatial process surface interpolation
 h <- 12
 surf.W <- MBA::mba.surf(cbind(crd_s, W), no.X = 500, no.Y = 500,
@@ -233,7 +233,7 @@ zlimp <- range(surf.Wp$z)
 iwp <- as.image.SpatialGridDataFrame(surf.Wp)
 
 # Plotting
-oldpar <- par()
+oldpar <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 
 plot(crd, type="n", cex=0.5, xlim=xlim, axes=FALSE, ylab="Northing", xlab="Easting",
@@ -253,7 +253,7 @@ par(oldpar)
 ```
 
 
-```{r, echo=F, fig.dim = c(7.25, 4), warning=F, message=F}
+```{r, echo=F, fig.dim = c(7.25, 4)}
 # True response surface interpolation
 h <- 12
 surf.Y <- MBA::mba.surf(cbind(crd_s, Y), no.X = 500, no.Y = 500,
@@ -276,7 +276,7 @@ zlimp <- range(surf.Yp$z)
 iyp <- as.image.SpatialGridDataFrame(surf.Yp)
 
 # Plotting
-oldpar <- par()
+oldpar <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 
 plot(crd, type="n", cex=0.5, xlim=xlim, axes=FALSE, ylab="Northing", xlab="Easting",

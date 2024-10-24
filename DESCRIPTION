@@ -1,6 +1,6 @@
 Package: spBPS
 Title: Bayesian Predictive Stacking for Scalable Geospatial Transfer Learning
-Version: 0.0-3
+Version: 0.0-4
 Authors@R: c(
     person("Luca", "Presicce", role = c("aut", "cre"), email = "l.presicce@campus.unimib.it", comment = c(ORCID = "0009-0005-7062-3523")),
     person("Sudipto", "Banerjee", role = "aut"))
