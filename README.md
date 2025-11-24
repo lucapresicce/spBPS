@@ -1,27 +1,52 @@
+# spBPS <a href="https://lucapresicce.github.io/spBPS/"><img src="man/figures/logo.png" align="right" height="138" alt="spBPS website" /></a>
+
+<!-- badges: end -->
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/spBPS?color=blue)](https://CRAN.R-project.org/package=spBPS)
+[![Downloads](https://cranlogs.r-pkg.org/badges/spBPS?color=orange)](https://CRAN.R-project.org/package=spBPS)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/spBPS?color=green)](https://CRAN.R-project.org/package=spBPS)
+
+
+<!--
+[![R-CMD-check](https://github.com/lucapresicce/spBPS/actions/workflows/Standard-CI.yaml/badge.svg)](https://github.com/lucapresicce/spBPS/actions/workflows/Standard-CI.yaml)
+
 # Univariate and Multivariate Accelerated Spatial Modeling by Bayesian Predictive Stacking
+-->
+
+## Overview
 
 This package provides the principal functions to perform accelerated modeling for univariate and multivariate spatial regressions. The package is used mostly within the novel working paper *"Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach" ([**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee, 2024+)"*. To guarantee the reproducibility of scientific results, in the [Bayesian-Transfer-Learning-for-GeoAI](https://github.com/lucapresicce/Bayesian-Transfer-Learning-for-GeoAI) repository are also available all the scripts of code used for simulations, data analysis, and results presented in the Manuscript and its Supplemental material.
 
 
---------------------------------------------------------------------------------
-## Roadmap
+## Installation
 
-| Folder | Description |
-| :--- | :---: |
-| `R` | contains funtions in R |
-| `src` | contains function in Rcpp/C++ |
+If installing from CRAN, use the following.
 
---------------------------------------------------------------------------------
-## Guided installation
-Since the package is not already available on CRAN (already submitted, and hopefully soon available), we use the `devtools` R package to install. Then, check for its presence on your device, otherwise install it:
-```{r, echo = F, eval = F, collapse = TRUE}
+```r
+install.packages("spBPS")
+```
+
+For a quick installation of the development version, run the following command 
+in R. We use the `devtools` R package to install. Then, check for its presence
+on your device, otherwise install it:
+
+```r
 if (!require(devtools)) {
   install.packages("devtools", dependencies = TRUE)
 }
 ```
+
 Once you have installed *devtools*, we can proceed. Let's install the `spBPS` package!
-```{r}
-devtools::install_github("lucapresicce/spBPS")
+
+```r
+devtools::install_github("lucapresicce/spFFBS")
+```
+
+
+## Usage
+Once successfully installed, load the library in R.
+
+```r
+library(spBPS)
 ```
 Cool! You are ready to start, now you too could perform **_fast & feasible_** Bayesian geostatistical modeling!
 
@@ -29,7 +54,7 @@ Cool! You are ready to start, now you too could perform **_fast & feasible_** Ba
 ## Tutorial for usage
 -->
 
---------------------------------------------------------------------------------
+
 ## Contacts
 
 | | |
