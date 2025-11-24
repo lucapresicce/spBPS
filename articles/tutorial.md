@@ -198,15 +198,15 @@ post_qnt_Y <- apply(pred_mat_Y, 1, quantile, c(0.025, 0.975))
 # Empirical coverage for Y
 coverage_Y <- mean(Y_u >= post_qnt_Y[1,] & Y_u <= post_qnt_Y[2,])
 cat("Empirical coverage for Response:", round(coverage_Y, 3),"\n")
-#> Empirical coverage for Response: 0.964
+#> Empirical coverage for Response: 0.972
 
 # Root Mean Square Prediction Error
 rmspe_W <- sqrt( mean( (W_u - post_mean_W)^2 ) )
 rmspe_Y <- sqrt( mean( (Y_u - post_mean_Y)^2 ) )
 cat("RMSPE for Spatial process:", round(rmspe_W, 3), "\n")
-#> RMSPE for Spatial process: 0.431
+#> RMSPE for Spatial process: 0.419
 cat("RMSPE for Response:", round(rmspe_Y, 3), "\n")
-#> RMSPE for Response: 0.59
+#> RMSPE for Response: 0.575
 ```
 
 ### Plot results

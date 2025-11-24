@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   tutorial: tutorial.html
-last_built: 2025-11-24T14:57Z
+last_built: 2025-11-24T15:09Z
 urls:
   reference: https://lucapresicce.github.io/spBPS/reference
   article: https://lucapresicce.github.io/spBPS/articles
