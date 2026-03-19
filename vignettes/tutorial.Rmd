@@ -98,11 +98,11 @@ subset_size <- 500
 R <- 200
 
 # number of computational cores
-n_core <- 2
+n_core <- 1
 ```
 
 ### Double BPS parallel fit
-Parallel implementation, exploiting 2 computing core.
+Parallel implementation, exploiting 1 computing core.
 ```{r, results=F}
 out <- spBPS(data = list(Y = Y, X = X),
       priors = priors,
