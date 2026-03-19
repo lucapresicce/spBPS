@@ -4,7 +4,7 @@ Provides functions for Bayesian Predictive Stacking within the Bayesian
 transfer learning framework for geospatial artificial systems, as
 introduced in "Bayesian Transfer Learning for Artificially Intelligent
 Geospatial Systems: A Predictive Stacking Approach" (Presicce and
-Banerjee, 2024)
+Banerjee, 2025)
 [doi:10.48550/arXiv.2410.09504](https://doi.org/10.48550/arXiv.2410.09504)
 . This methodology enables efficient Bayesian geostatistical modeling,
 utilizing predictive stacking to improve inference across spatial
@@ -13,6 +13,12 @@ computation, making the framework well-suited for large-scale spatial
 data analysis in parallel and distributed computing environments.
 Designed for scalability, it allows seamless application in
 computationally demanding scenarios.
+
+## See also
+
+Useful links:
+
+- <https://lucapresicce.github.io/spBPS/>
 
 ## Author
 

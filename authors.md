@@ -9,14 +9,14 @@
 
 ## Citation
 
-Presicce L, Banerjee S (2025). *spBPS: Bayesian Predictive Stacking for
-Scalable Geospatial Transfer Learning*. R package version 0.0-4,
+Presicce L, Banerjee S (2026). *spBPS: Bayesian Predictive Stacking for
+Scalable Geospatial Transfer Learning*. R package version 1.0-1,
 <https://lucapresicce.github.io/spBPS/>.
 
     @Manual{,
       title = {spBPS: Bayesian Predictive Stacking for Scalable Geospatial Transfer Learning},
       author = {Luca Presicce and Sudipto Banerjee},
-      year = {2025},
-      note = {R package version 0.0-4},
+      year = {2026},
+      note = {R package version 1.0-1},
       url = {https://lucapresicce.github.io/spBPS/},
     }

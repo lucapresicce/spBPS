@@ -8,28 +8,15 @@
 - [`BPS_combine()`](https://lucapresicce.github.io/spBPS/reference/BPS_combine.md)
   : Combine subset models wiht BPS
 
-- [`BPS_post()`](https://lucapresicce.github.io/spBPS/reference/BPS_post.md)
-  : Perform the BPS sampling from posterior and posterior predictive
-  given a set of stacking weights
-
 - [`BPS_post_MvT()`](https://lucapresicce.github.io/spBPS/reference/BPS_post_MvT.md)
   : Perform the BPS sampling from posterior and posterior predictive
   given a set of stacking weights
 
-- [`BPS_postdraws()`](https://lucapresicce.github.io/spBPS/reference/BPS_postdraws.md)
-  : Compute the BPS posterior samples given a set of stacking weights
-
 - [`BPS_postdraws_MvT()`](https://lucapresicce.github.io/spBPS/reference/BPS_postdraws_MvT.md)
   : Compute the BPS posterior samples given a set of stacking weights
 
-- [`BPS_pred()`](https://lucapresicce.github.io/spBPS/reference/BPS_pred.md)
-  : Compute the BPS spatial prediction given a set of stacking weights
-
 - [`BPS_pred_MvT()`](https://lucapresicce.github.io/spBPS/reference/BPS_pred_MvT.md)
   : Compute the BPS spatial prediction given a set of stacking weights
-
-- [`BPS_weights()`](https://lucapresicce.github.io/spBPS/reference/BPS_weights.md)
-  : Compute the BPS weights by convex optimization
 
 - [`BPS_weights_MvT()`](https://lucapresicce.github.io/spBPS/reference/BPS_weights_MvT.md)
   : Compute the BPS weights by convex optimization
@@ -47,24 +34,12 @@
   : Solver for Bayesian Predictive Stacking of Predictive densities
   convex optimization problem
 
-- [`d_pred_cpp()`](https://lucapresicce.github.io/spBPS/reference/d_pred_cpp.md)
-  : Evaluate the density of a set of unobserved response with respect to
-  the conditional posterior predictive
-
 - [`d_pred_cpp_MvT()`](https://lucapresicce.github.io/spBPS/reference/d_pred_cpp_MvT.md)
   : Evaluate the density of a set of unobserved response with respect to
   the conditional posterior predictive
 
-- [`dens_kcv()`](https://lucapresicce.github.io/spBPS/reference/dens_kcv.md)
-  : Compute the KCV of the density evaluations for fixed values of the
-  hyperparameters
-
 - [`dens_kcv_MvT()`](https://lucapresicce.github.io/spBPS/reference/dens_kcv_MvT.md)
   : Compute the KCV of the density evaluations for fixed values of the
-  hyperparameters
-
-- [`dens_loocv()`](https://lucapresicce.github.io/spBPS/reference/dens_loocv.md)
-  : Compute the LOOCV of the density evaluations for fixed values of the
   hyperparameters
 
 - [`dens_loocv_MvT()`](https://lucapresicce.github.io/spBPS/reference/dens_loocv_MvT.md)
@@ -77,10 +52,6 @@
   Build a grid from two vector (i.e. equivalent to
   [`expand.grid()`](https://rdrr.io/r/base/expand.grid.html) in `R`)
 
-- [`fit_cpp()`](https://lucapresicce.github.io/spBPS/reference/fit_cpp.md)
-  : Compute the parameters for the posteriors distribution of \\\beta\\
-  and \\\Sigma\\ (i.e. updated parameters)
-
 - [`fit_cpp_MvT()`](https://lucapresicce.github.io/spBPS/reference/fit_cpp_MvT.md)
   : Compute the parameters for the posteriors distribution of \\\beta\\
   and \\\Sigma\\ (i.e. updated parameters)
@@ -88,16 +59,9 @@
 - [`forceSymmetry_cpp()`](https://lucapresicce.github.io/spBPS/reference/forceSymmetry_cpp.md)
   : Function to subset data for meta-analysis
 
-- [`models_dens()`](https://lucapresicce.github.io/spBPS/reference/models_dens.md)
-  : Return the CV predictive density evaluations for all the model
-  combinations
-
 - [`models_dens_MvT()`](https://lucapresicce.github.io/spBPS/reference/models_dens_MvT.md)
   : Return the CV predictive density evaluations for all the model
   combinations
-
-- [`post_draws()`](https://lucapresicce.github.io/spBPS/reference/post_draws.md)
-  : Sample R draws from the posterior distributions
 
 - [`post_draws_MvT()`](https://lucapresicce.github.io/spBPS/reference/post_draws_MvT.md)
   : Sample R draws from the posterior distributions
@@ -105,24 +69,12 @@
 - [`pred_bayesMvLMconjugate()`](https://lucapresicce.github.io/spBPS/reference/pred_bayesMvLMconjugate.md)
   : Predictive sampler for Conjugate Bayesian Multivariate Linear Models
 
-- [`r_pred_cond()`](https://lucapresicce.github.io/spBPS/reference/r_pred_cond.md)
-  : Draw from the conditional posterior predictive for a set of
-  unobserved covariates
-
 - [`r_pred_cond_MvT()`](https://lucapresicce.github.io/spBPS/reference/r_pred_cond_MvT.md)
   : Draw from the conditional posterior predictive for a set of
   unobserved covariates
 
-- [`r_pred_joint()`](https://lucapresicce.github.io/spBPS/reference/r_pred_joint.md)
-  : Draw from the joint posterior predictive for a set of unobserved
-  covariates
-
 - [`r_pred_joint_MvT()`](https://lucapresicce.github.io/spBPS/reference/r_pred_joint_MvT.md)
   : Draw from the joint posterior predictive for a set of unobserved
-  covariates
-
-- [`r_pred_marg()`](https://lucapresicce.github.io/spBPS/reference/r_pred_marg.md)
-  : Draw from the marginals posterior predictive for a set of unobserved
   covariates
 
 - [`r_pred_marg_MvT()`](https://lucapresicce.github.io/spBPS/reference/r_pred_marg_MvT.md)
@@ -132,9 +84,8 @@
 - [`sample_index()`](https://lucapresicce.github.io/spBPS/reference/sample_index.md)
   : Function to sample integers (index)
 
-- [`spPredict_BPS()`](https://lucapresicce.github.io/spBPS/reference/spPredict_BPS.md)
-  : Perform prediction for BPS accelerated models - loop over prediction
-  set
+- [`spBPS()`](https://lucapresicce.github.io/spBPS/reference/spBPS.md) :
+  Unified spatial BPS workflow (multivariate path, works for q = 1)
 
 - [`subset_data()`](https://lucapresicce.github.io/spBPS/reference/subset_data.md)
   : Function to subset data for meta-analysis

@@ -19,13 +19,3 @@ arma_dist(X)
 
 [matrix](https://rdrr.io/r/base/matrix.html) distance matrix of the
 elements of \\X\\
-
-## Examples
-
-``` r
-## Compute the Distance matrix of dimension (n x n)
-n <- 100
-p <- 2
-X <- matrix(runif(n*p), nrow = n, ncol = p)
-distance.matrix <- arma_dist(X)
-```
