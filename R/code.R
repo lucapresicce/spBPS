@@ -4,18 +4,8 @@
 #'
 #' @return W [matrix] of Bayesian Predictive Stacking weights for the K models considered
 #'
-#' @importFrom CVXR Variable Maximize Problem solve
+#' @importFrom CVXR Variable Maximize Problem psolve status value
 #'
-#' @examples
-#' ## Generate (randomly) K predictive scores for n observations
-#' n <- 50
-#' K <- 5
-#' scores <- matrix(runif(n*K), nrow = n, ncol = K)
-#'
-#' ## Find Bayesian Predictive Stacking weights
-#' opt_weights <- conv_opt(scores)
-#'
-#' @export
 conv_opt <- function(scores) {
   # library(CVXR, quietly = T)
 
@@ -26,13 +16,20 @@ conv_opt <- function(scores) {
   # the constraint for sum up to 1 with positive weights
   f <- Maximize( mean( log( scores %*% weights ) ) )
   problem <- Problem(f, constraints)
-  result <- solve(problem, solver = "ECOS_BB") # ECOS, SCS, OSQP
+
+  # set the solver
+  solver_to_use <- if (requireNamespace("ECOSolveR", quietly = TRUE)) {
+    "ECOS_BB"
+  } else {
+    "SCS"  # CLARABEL, ECOS, OSQP
+  }
+  result <- psolve(problem, solver = solver_to_use)
 
   # return the weights
-  W <- if(result$status == "solver_error") {
+  W <- if(status( problem ) == "solver_error") {
     matrix(rep(1/ncol(scores), ncol(scores)))
   } else {
-    result$getValue(weights)
+    value( weights )
   }
   return(W)
 }

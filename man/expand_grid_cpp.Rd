@@ -17,10 +17,3 @@ expand_grid_cpp(x, y)
 \description{
 Build a grid from two vector (i.e. equivalent to \code{expand.grid()} in \code{R})
 }
-\examples{
-## Create a matrix from all combination of vectors
-x <- seq(0, 10, length.out = 100)
-y <- seq(-1, 1, length.out = 20)
-grid <- expand_grid_cpp(x = x, y = y)
-
-}

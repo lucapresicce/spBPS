@@ -16,6 +16,7 @@
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #'
 #' @examples
+#' \donttest{
 #' ## Generate data
 #' n <- 100
 #' p <- 3
@@ -34,6 +35,7 @@
 #' burn_in <- 500
 #' set.seed(1234)
 #' samples <- spBPS::bayesMvLMconjugate(Y, X, mu_B, V_B, nu, Psi, n_iter, burn_in)
+#' }
 #'
 #' @export
 bayesMvLMconjugate <- function(Y, X, mu_B, V_B, nu, Psi, n_iter = 1000, burn_in = 500) {
@@ -89,6 +91,7 @@ bayesMvLMconjugate <- function(Y, X, mu_B, V_B, nu, Psi, n_iter = 1000, burn_in 
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #'
 #' @examples
+#' \donttest{
 #' ## Generate data
 #' n <- 100
 #' p <- 3
@@ -116,6 +119,7 @@ bayesMvLMconjugate <- function(Y, X, mu_B, V_B, nu, Psi, n_iter = 1000, burn_in 
 #' m <- 50
 #' X_new <- matrix(rnorm(m*p), nrow = m, ncol = p)
 #' pred <- spBPS::pred_bayesMvLMconjugate(X_new, B_samples, Sigma_samples)
+#' }
 #'
 #' @export
 pred_bayesMvLMconjugate <- function(X_new, B_samples, Sigma_samples) {

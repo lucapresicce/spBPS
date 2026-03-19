@@ -32,6 +32,7 @@ Sigma_samples \link{array} of posterior samples for \eqn{\Sigma}
 Gibbs sampler for Conjugate Bayesian Multivariate Linear Models
 }
 \examples{
+\donttest{
 ## Generate data
 n <- 100
 p <- 3
@@ -50,5 +51,6 @@ n_iter <- 1000
 burn_in <- 500
 set.seed(1234)
 samples <- spBPS::bayesMvLMconjugate(Y, X, mu_B, V_B, nu, Psi, n_iter, burn_in)
+}
 
 }
