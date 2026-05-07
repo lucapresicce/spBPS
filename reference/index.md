@@ -69,6 +69,9 @@
 - [`pred_bayesMvLMconjugate()`](https://lucapresicce.github.io/spBPS/reference/pred_bayesMvLMconjugate.md)
   : Predictive sampler for Conjugate Bayesian Multivariate Linear Models
 
+- [`predict(`*`<spBPS>`*`)`](https://lucapresicce.github.io/spBPS/reference/predict.spBPS.md)
+  : Predict at new locations using a fitted spBPS model
+
 - [`r_pred_cond_MvT()`](https://lucapresicce.github.io/spBPS/reference/r_pred_cond_MvT.md)
   : Draw from the conditional posterior predictive for a set of
   unobserved covariates
@@ -86,6 +89,9 @@
 
 - [`spBPS()`](https://lucapresicce.github.io/spBPS/reference/spBPS.md) :
   Unified spatial BPS workflow (multivariate path, works for q = 1)
+
+- [`spBPS_old()`](https://lucapresicce.github.io/spBPS/reference/spBPS_old.md)
+  : Unified spatial BPS workflow (multivariate path, works for q = 1)
 
 - [`subset_data()`](https://lucapresicce.github.io/spBPS/reference/subset_data.md)
   : Function to subset data for meta-analysis

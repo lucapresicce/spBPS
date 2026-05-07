@@ -24,6 +24,7 @@ its Supplemental material.
 If installing from CRAN, use the following.
 
 ``` r
+
 install.packages("spBPS")
 ```
 
@@ -32,6 +33,7 @@ command in R. We use the `devtools` R package to install. Then, check
 for its presence on your device, otherwise install it:
 
 ``` r
+
 if (!require(devtools)) {
   install.packages("devtools", dependencies = TRUE)
 }
@@ -41,6 +43,7 @@ Once you have installed *devtools*, we can proceed. Let’s install the
 `spBPS` package!
 
 ``` r
+
 devtools::install_github("lucapresicce/spBPS")
 ```
 
@@ -49,6 +52,7 @@ devtools::install_github("lucapresicce/spBPS")
 Once successfully installed, load the library in R.
 
 ``` r
+
 library(spBPS)
 ```
 
@@ -57,11 +61,11 @@ feasible*** Bayesian geostatistical modeling!
 
 ## Contacts
 
-|            |                                                                                                                                                                                                  |
-|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| Author     |                                                      Luca Presicce (<l.presicce@campus.unimib.it>) & Sudipto Banerjee (<sudipto@ucla.edu>)                                                       |
-| Maintainer |                                                                          Luca Presicce (<l.presicce@campus.unimib.it>)                                                                           |
-| Reference  | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *“Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach”* |
+|  |  |
+|:---|:--:|
+| Author | Luca Presicce (<l.presicce@campus.unimib.it>) & Sudipto Banerjee (<sudipto@ucla.edu>) |
+| Maintainer | Luca Presicce (<l.presicce@campus.unimib.it>) |
+| Reference | [**Luca Presicce**](https://lucapresicce.github.io/) and Sudipto Banerjee (2024+) *“Bayesian Transfer Learning for Artificially Intelligent Geospatial Systems: A Predictive Stacking Approach”* |
 
 # Package index
 
@@ -134,6 +138,9 @@ feasible*** Bayesian geostatistical modeling!
 - [`pred_bayesMvLMconjugate()`](https://lucapresicce.github.io/spBPS/reference/pred_bayesMvLMconjugate.md)
   : Predictive sampler for Conjugate Bayesian Multivariate Linear Models
 
+- [`predict(`*`<spBPS>`*`)`](https://lucapresicce.github.io/spBPS/reference/predict.spBPS.md)
+  : Predict at new locations using a fitted spBPS model
+
 - [`r_pred_cond_MvT()`](https://lucapresicce.github.io/spBPS/reference/r_pred_cond_MvT.md)
   : Draw from the conditional posterior predictive for a set of
   unobserved covariates
@@ -151,6 +158,9 @@ feasible*** Bayesian geostatistical modeling!
 
 - [`spBPS()`](https://lucapresicce.github.io/spBPS/reference/spBPS.md) :
   Unified spatial BPS workflow (multivariate path, works for q = 1)
+
+- [`spBPS_old()`](https://lucapresicce.github.io/spBPS/reference/spBPS_old.md)
+  : Unified spatial BPS workflow (multivariate path, works for q = 1)
 
 - [`subset_data()`](https://lucapresicce.github.io/spBPS/reference/subset_data.md)
   : Function to subset data for meta-analysis

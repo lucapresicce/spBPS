@@ -2,8 +2,9 @@
 
 Orchestrates subsetting, local stacking weight estimation, global
 stacking combination, and optional posterior or predictive simulation
-using the multivariate Student-t spatial model. Works for both
-multivariate outcomes and the univariate case via `q = 1`.
+using Double Bayesian Predictive Stacking for latent spatial regression.
+Works for both multivariate outcomes and the univariate case via
+`q = 1`.
 
 ## Usage
 
@@ -21,7 +22,8 @@ spBPS(
   draws = 0L,
   newdata = NULL,
   include_latent = FALSE,
-  cores = NULL
+  n_cores = 1L,
+  pred_batch_size = 200L
 )
 ```
 
@@ -29,20 +31,22 @@ spBPS(
 
 - data:
 
-  List with matrices `Y` (response) and `X` (covariates).
+  List with matrices `Y` (response, n x q) and `X` (covariates, n x p).
 
 - priors:
 
-  List of priors for the multivariate model (`mu_B`, `V_r`, `Psi`,
-  `nu`).
+  List of priors for the multivariate model: `mu_B` (p x q mean matrix),
+  `V_r` (p x p covariance), `Psi` (q x q scale), `nu` (degrees of
+  freedom).
 
 - coords:
 
-  Matrix of observation coordinates.
+  Matrix of observation coordinates (n x d).
 
 - hyperpar:
 
-  List with elements `alpha` and `phi` (vectors allowed).
+  List with elements `alpha` and `phi` (vectors allowed); defines the
+  grid of models over which stacking weights are computed.
 
 - subset_size:
 
@@ -55,7 +59,7 @@ spBPS(
 
 - cv_folds:
 
-  Number of folds for local cross-validation (default 5).
+  Number of folds for local cross-validation. Default 5.
 
 - rp:
 
@@ -64,34 +68,82 @@ spBPS(
 
 - combine_method:
 
-  Choose between Bayesian Predictive Stacking (`"bps"`) or pseudo-BMA
-  (`"pseudoBMA"`) for combining subsets.
+  Global combination method: Bayesian Predictive Stacking (`"bps"`) or
+  pseudo-BMA (`"pseudoBMA"`).
 
 - draws:
 
-  Number of joint posterior/predictive draws to return (0 to skip). When
-  positive, `newdata` must be supplied because draws are obtained via
-  `BPS_post_MvT` which jointly samples posterior and predictive.
+  Number of posterior/predictive draws to return (0 to skip sampling).
+  When positive and `newdata` is supplied, joint posterior and
+  predictive draws are returned. When positive and `newdata` is `NULL`,
+  only posterior draws (beta, sigma) are returned.
 
 - newdata:
 
-  Optional list with `X` and `coords` for prediction locations; required
-  when either draw count is positive.
+  Optional list with `X` (u x p) and `coords` (u x d) for prediction
+  locations. Required when `draws > 0` and predictions are desired. For
+  large `u`, use `pred_batch_size` to control memory usage.
 
 - include_latent:
 
-  Logical; if `TRUE`, posterior draws include latent processes.
+  Unused; kept for compatibility.
 
-- cores:
+- n_cores:
 
-  Optional integer; when \>1 a parallel backend is registered internally
-  via `doParallel::registerDoParallel(cores)` for the fit and draw
-  loops. When `NULL`, the existing foreach backend (if any) is used.
+  Number of cores for parallel computation. Controls both the local
+  weight estimation (parallel over K subsets) and predictive sampling.
+  Default 1.
+
+- pred_batch_size:
+
+  Batch size for streaming prediction. Controls the maximum number of
+  prediction sites processed at once, hence the peak memory usage.
+  Default 200. Rule of thumb: peak RAM (MB) ? batch_size x q x draws x 8
+  / 1e6. Set `NULL` for automatic selection (min(200, u)).
 
 ## Value
 
-List with components `subsets`, `weights_global`, `weights_local`,
-`epd`, and optional `posterior` and `predictive` draws.
+Object of class `"spBPS"` ? a list with components:
+
+- subsets:
+
+  Partition information: Y_list, X_list, crd_list.
+
+- weights_global:
+
+  K-vector of global stacking weights.
+
+- weights_local:
+
+  K-list of local stacking weight vectors.
+
+- epd:
+
+  K-list of n_k x J log-density matrices.
+
+- priors, hyperpar:
+
+  Stored for use by
+  [`predict.spBPS`](https://lucapresicce.github.io/spBPS/reference/predict.spBPS.md).
+
+- timings:
+
+  Named numeric vector: fitting, combination, sampling (seconds).
+
+- posterior:
+
+  (if draws \> 0) List with three-dimensional arrays: `beta` (p x q x
+  R), `sigma` (q x q x R), `model` (R).
+
+- predictive:
+
+  (if draws \> 0 and newdata supplied) List with three-dimensional
+  arrays: `Wu`, `Yu`, `MY` (each u x q x R).
+
+## See also
+
+[`predict.spBPS`](https://lucapresicce.github.io/spBPS/reference/predict.spBPS.md)
+for generating predictions on new data after fitting.
 
 ## Examples
 
@@ -101,36 +153,37 @@ n <- 1000
 p <- 2
 q <- 1
 
-Y <- matrix(rnorm(n*q), ncol = q)
-X <- matrix(rnorm(n*p), ncol = p)
-coords <- matrix(runif(n*2), ncol = 2)
+Y <- matrix(rnorm(n * q), ncol = q)
+X <- matrix(rnorm(n * p), ncol = p)
+coords <- matrix(runif(n * 2), ncol = 2)
 
-data <- list(Y = Y, X = X)
-priors <- list(mu_B = matrix(0, nrow = p, ncol = q),
-                             V_r = diag(10, p),
-                             Psi = diag(1, q),
-                             nu = 3)
+data    <- list(Y = Y, X = X)
+priors  <- list(mu_B = matrix(0, nrow = p, ncol = q),
+                V_r  = diag(10, p),
+                Psi  = diag(1, q),
+                nu   = 3)
 hyperpar <- list(alpha = 0.5, phi = 1)
-subset_size <- 200
 
-res <- spBPS(data, priors, coords, hyperpar, subset_size = subset_size)
+res <- spBPS(data, priors, coords, hyperpar, subset_size = 200)
 #> 
 #> ====================================================
 #>          Welcome to spBPS Bayesian Engine
 #> ====================================================
 #> 
-#> Pritioning data into K = 5 subsets ... 
+#> Partitioning data into K = 5 subsets ...
 #> 
 #> Computing local stacking weights over J = 1 models ...
-#> Local weights computed.
+#> Local weights computed in 0.1 s.
 #> 
 #> Computing global stacking weights over K = 5 partitions ...
-#> Global weights computed.
+#> Global weights computed in 0.0 s.
 #> 
 #> ====================================================
 #>      spBPS pipeline completed successfully!
 #> ====================================================
+#>   Fitting:     0.1 s
+#>   Combination: 0.0 s
+#>   TOTAL:       0.1 s
 #> 
-
 # }
 ```

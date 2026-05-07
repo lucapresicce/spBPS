@@ -2,6 +2,8 @@
 
 ## spBPS 1.0-1
 
+CRAN release: 2026-03-19
+
 ### New functions
 
 - Introduce spBPS() orchestrator function to simplify workflow execution

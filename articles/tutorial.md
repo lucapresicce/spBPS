@@ -9,12 +9,14 @@ details please refer to (Presicce and Banerjee 2024). More examples, for
 multivariate data, are available in documentation, and functions help.
 
 ``` r
+
 library(spBPS)
 ```
 
 ### Working packages
 
 ``` r
+
 library(foreach)
 library(parallel)
 library(doParallel)
@@ -34,6 +36,7 @@ We generate data from the model detailed in Equation (2.4) (Presicce and
 Banerjee 2024), over a unit square.
 
 ``` r
+
 # dimensions
 n <- 1000
 u <- 250
@@ -72,6 +75,7 @@ Y_u <- Y_or[-(1:n), ]
 ### Setting priors and hyperparameters
 
 ``` r
+
 # priors 
 priors <- list(mu_B = matrix(0, nrow = p, ncol = q),
                V_r = diag(10, p),
@@ -87,8 +91,9 @@ hyperpar <- list(alpha = alfa_seq, phi = phi_seq)
 ### Setting dimensions
 
 ``` r
+
 # subset dimension
-subset_size <- 500
+subset_size <- 100
 
 # number of posterior draws
 R <- 200
@@ -102,6 +107,7 @@ n_core <- 1
 Parallel implementation, exploiting 1 computing core.
 
 ``` r
+
 out <- spBPS(data = list(Y = Y, X = X),
       priors = priors,
       coords = crd_s,
@@ -110,14 +116,15 @@ out <- spBPS(data = list(Y = Y, X = X),
       combine_method = "bps",
       draws = R,
       newdata = list(X = X_u, coords = crd_u),
-      cores = n_core)
+      n_cores = n_core)
 ```
 
 ### Results collection
 
 ``` r
+
 # statistics computations W
-pred_mat_W <- do.call(abind, c(lapply(out$predictive, function(x) x$Wu), along = 3))
+pred_mat_W <- out$predictive$Wu
 post_mean_W <- apply(pred_mat_W, c(1,2), mean)
 post_qnt_W <- apply(pred_mat_W, c(1,2), quantile, c(0.025, 0.975))
 
@@ -127,7 +134,7 @@ cat("Empirical coverage for Spatial process:", round(coverage_W, 3),"\n")
 #> Empirical coverage for Spatial process: 1
 
 # statistics computations Y
-pred_mat_Y <- do.call(abind, c(lapply(out$predictive, function(x) x$Yu), along = 3))
+pred_mat_Y <- out$predictive$Yu
 post_mean_Y <- apply(pred_mat_Y, c(1,2), mean)
 post_qnt_Y <- apply(pred_mat_Y, c(1,2), quantile, c(0.025, 0.975))
 
@@ -140,18 +147,20 @@ cat("Empirical coverage for Response:", round(coverage_Y, 3),"\n")
 rmspe_W <- sqrt( mean( (W_u - post_mean_W)^2 ) )
 rmspe_Y <- sqrt( mean( (Y_u - post_mean_Y)^2 ) )
 cat("RMSPE for Spatial process:", round(rmspe_W, 3), "\n")
-#> RMSPE for Spatial process: 0.401
+#> RMSPE for Spatial process: 0.487
 cat("RMSPE for Response:", round(rmspe_Y, 3), "\n")
-#> RMSPE for Response: 0.568
+#> RMSPE for Response: 0.624
 ```
 
 ### Plot results
 
 ![](tutorial_files/figure-html/unnamed-chunk-9-1.png)
 
-## ![](tutorial_files/figure-html/unnamed-chunk-11-1.png)
+![](tutorial_files/figure-html/unnamed-chunk-11-1.png)
+
+------------------------------------------------------------------------
 
 Presicce, Luca, and Sudipto Banerjee. 2024. “Bayesian Transfer Learning
 for Artificially Intelligent Geospatial Systems: A Predictive Stacking
-Approach.” *arXiv Preprint*, arXiv:2410.09504.
+Approach.” *arXiv Preprint*, preprint, arXiv:2410.09504.
 <https://doi.org/10.48550/arXiv.2410.09504>.
