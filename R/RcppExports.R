@@ -229,6 +229,86 @@ BPS_postdraws_MvT <- function(data, priors, coords, hyperpar, W, R, par) {
     .Call(`_spBPS_BPS_postdraws_MvT`, data, priors, coords, hyperpar, W, R, par)
 }
 
+#' @keywords internal
+BPS_post_all_subsets_v2 <- function(Y_list, X_list, crd_list, W_local_list, subset_ind, priors, hyperpar, n_cores) {
+    .Call(`_spBPS_BPS_post_all_subsets_v2`, Y_list, X_list, crd_list, W_local_list, subset_ind, priors, hyperpar, n_cores)
+}
+
+#' @keywords internal
+BPS_pred_streaming_v2 <- function(Y_list, X_list, crd_list, W_local_list, subset_ind, crd_u, X_u, priors, hyperpar, pred_batch_size, n_cores, return_summary, prob_lo, prob_hi) {
+    .Call(`_spBPS_BPS_pred_streaming_v2`, Y_list, X_list, crd_list, W_local_list, subset_ind, crd_u, X_u, priors, hyperpar, pred_batch_size, n_cores, return_summary, prob_lo, prob_hi)
+}
+
+#' @keywords internal
+fit_cpp_MvT_v2 <- function(data, priors, coords, hyperpar, iVr_pre) {
+    .Call(`_spBPS_fit_cpp_MvT_v2`, data, priors, coords, hyperpar, iVr_pre)
+}
+
+#' @keywords internal
+post_draws_MvT_v2 <- function(poster, R, par, p) {
+    .Call(`_spBPS_post_draws_MvT_v2`, poster, R, par, p)
+}
+
+#' @keywords internal
+d_pred_cpp_MvT_v2 <- function(data, X_u, Y_u, cross_d, hyperpar, poster, Lc_Psi) {
+    .Call(`_spBPS_d_pred_cpp_MvT_v2`, data, X_u, Y_u, cross_d, hyperpar, poster, Lc_Psi)
+}
+
+#' @keywords internal
+dens_kcv_MvT_v2 <- function(data, priors, coords, hyperpar, K) {
+    .Call(`_spBPS_dens_kcv_MvT_v2`, data, priors, coords, hyperpar, K)
+}
+
+#' @keywords internal
+models_dens_MvT_v2 <- function(data, priors, coords, hyperpar, K) {
+    .Call(`_spBPS_models_dens_MvT_v2`, data, priors, coords, hyperpar, K)
+}
+
+#' @keywords internal
+BPS_weights_MvT_v2 <- function(data, priors, coords, hyperpar, K) {
+    .Call(`_spBPS_BPS_weights_MvT_v2`, data, priors, coords, hyperpar, K)
+}
+
+#' @keywords internal
+BPS_combine_v2 <- function(fit_list, K, rp) {
+    .Call(`_spBPS_BPS_combine_v2`, fit_list, K, rp)
+}
+
+#' @keywords internal
+compute_all_local_weights_v2 <- function(Y_list, X_list, crd_list, priors, hyperpar, cv_folds, n_cores) {
+    .Call(`_spBPS_compute_all_local_weights_v2`, Y_list, X_list, crd_list, priors, hyperpar, cv_folds, n_cores)
+}
+
+#' @keywords internal
+BPS_post_MvT_v2 <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores) {
+    .Call(`_spBPS_BPS_post_MvT_v2`, data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores)
+}
+
+#' @keywords internal
+BPS_post_MvT_v2_batch <- function(data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores, pred_batch_size) {
+    .Call(`_spBPS_BPS_post_MvT_v2_batch`, data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores, pred_batch_size)
+}
+
+#' @keywords internal
+BPS_pred_all_subsets_v2 <- function(Y_list, X_list, crd_list, W_local_list, subset_ind, d_u, Rphi_u_list, X_u, crd_u, priors, hyperpar, pred_batch_size, n_cores) {
+    .Call(`_spBPS_BPS_pred_all_subsets_v2`, Y_list, X_list, crd_list, W_local_list, subset_ind, d_u, Rphi_u_list, X_u, crd_u, priors, hyperpar, pred_batch_size, n_cores)
+}
+
+#' @keywords internal
+BPS_postdraws_MvT_v2 <- function(data, priors, coords, hyperpar, W, R, par) {
+    .Call(`_spBPS_BPS_postdraws_MvT_v2`, data, priors, coords, hyperpar, W, R, par)
+}
+
+#' @keywords internal
+BPS_PseudoBMA_v2 <- function(fit_list, n_cores = 1L) {
+    .Call(`_spBPS_BPS_PseudoBMA_v2`, fit_list, n_cores)
+}
+
+#' @keywords internal
+dmatrix_t_test <- function(X, Lambda, SigmaR, SigmaC, nu, log_d = FALSE) {
+    .Call(`_spBPS_dmatrix_t_test`, X, Lambda, SigmaR, SigmaC, nu, log_d)
+}
+
 #' Compute the Euclidean distance matrix
 #'
 #' @param X [matrix] (tipically of \eqn{N} coordindates on \eqn{\mathbb{R}^2} )

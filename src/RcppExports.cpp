@@ -255,6 +255,280 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// BPS_post_all_subsets_v2
+List BPS_post_all_subsets_v2(const List& Y_list, const List& X_list, const List& crd_list, const List& W_local_list, const arma::uvec& subset_ind, const List& priors, const List& hyperpar, int n_cores);
+RcppExport SEXP _spBPS_BPS_post_all_subsets_v2(SEXP Y_listSEXP, SEXP X_listSEXP, SEXP crd_listSEXP, SEXP W_local_listSEXP, SEXP subset_indSEXP, SEXP priorsSEXP, SEXP hyperparSEXP, SEXP n_coresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Y_list(Y_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type X_list(X_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type crd_list(crd_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_local_list(W_local_listSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type subset_ind(subset_indSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_post_all_subsets_v2(Y_list, X_list, crd_list, W_local_list, subset_ind, priors, hyperpar, n_cores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_pred_streaming_v2
+List BPS_pred_streaming_v2(const List& Y_list, const List& X_list, const List& crd_list, const List& W_local_list, const arma::uvec& subset_ind, const arma::mat& crd_u, const arma::mat& X_u, const List& priors, const List& hyperpar, int pred_batch_size, int n_cores, bool return_summary, double prob_lo, double prob_hi);
+RcppExport SEXP _spBPS_BPS_pred_streaming_v2(SEXP Y_listSEXP, SEXP X_listSEXP, SEXP crd_listSEXP, SEXP W_local_listSEXP, SEXP subset_indSEXP, SEXP crd_uSEXP, SEXP X_uSEXP, SEXP priorsSEXP, SEXP hyperparSEXP, SEXP pred_batch_sizeSEXP, SEXP n_coresSEXP, SEXP return_summarySEXP, SEXP prob_loSEXP, SEXP prob_hiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Y_list(Y_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type X_list(X_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type crd_list(crd_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_local_list(W_local_listSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type subset_ind(subset_indSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type crd_u(crd_uSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X_u(X_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type pred_batch_size(pred_batch_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    Rcpp::traits::input_parameter< bool >::type return_summary(return_summarySEXP);
+    Rcpp::traits::input_parameter< double >::type prob_lo(prob_loSEXP);
+    Rcpp::traits::input_parameter< double >::type prob_hi(prob_hiSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_pred_streaming_v2(Y_list, X_list, crd_list, W_local_list, subset_ind, crd_u, X_u, priors, hyperpar, pred_batch_size, n_cores, return_summary, prob_lo, prob_hi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// fit_cpp_MvT_v2
+List fit_cpp_MvT_v2(const List& data, const List& priors, const arma::mat& coords, const List& hyperpar, const arma::mat& iVr_pre);
+RcppExport SEXP _spBPS_fit_cpp_MvT_v2(SEXP dataSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP hyperparSEXP, SEXP iVr_preSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type iVr_pre(iVr_preSEXP);
+    rcpp_result_gen = Rcpp::wrap(fit_cpp_MvT_v2(data, priors, coords, hyperpar, iVr_pre));
+    return rcpp_result_gen;
+END_RCPP
+}
+// post_draws_MvT_v2
+List post_draws_MvT_v2(const List& poster, const int R, const bool par, const int p);
+RcppExport SEXP _spBPS_post_draws_MvT_v2(SEXP posterSEXP, SEXP RSEXP, SEXP parSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type poster(posterSEXP);
+    Rcpp::traits::input_parameter< const int >::type R(RSEXP);
+    Rcpp::traits::input_parameter< const bool >::type par(parSEXP);
+    Rcpp::traits::input_parameter< const int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(post_draws_MvT_v2(poster, R, par, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// d_pred_cpp_MvT_v2
+double d_pred_cpp_MvT_v2(const List& data, const arma::mat& X_u, const arma::mat& Y_u, const arma::mat& cross_d, const List& hyperpar, const List& poster, const arma::mat& Lc_Psi);
+RcppExport SEXP _spBPS_d_pred_cpp_MvT_v2(SEXP dataSEXP, SEXP X_uSEXP, SEXP Y_uSEXP, SEXP cross_dSEXP, SEXP hyperparSEXP, SEXP posterSEXP, SEXP Lc_PsiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X_u(X_uSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y_u(Y_uSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type cross_d(cross_dSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< const List& >::type poster(posterSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Lc_Psi(Lc_PsiSEXP);
+    rcpp_result_gen = Rcpp::wrap(d_pred_cpp_MvT_v2(data, X_u, Y_u, cross_d, hyperpar, poster, Lc_Psi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dens_kcv_MvT_v2
+arma::vec dens_kcv_MvT_v2(const List& data, const List& priors, const arma::mat& coords, const List& hyperpar, int K);
+RcppExport SEXP _spBPS_dens_kcv_MvT_v2(SEXP dataSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP hyperparSEXP, SEXP KSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(dens_kcv_MvT_v2(data, priors, coords, hyperpar, K));
+    return rcpp_result_gen;
+END_RCPP
+}
+// models_dens_MvT_v2
+arma::mat models_dens_MvT_v2(const List& data, const List& priors, const arma::mat& coords, const List& hyperpar, int K);
+RcppExport SEXP _spBPS_models_dens_MvT_v2(SEXP dataSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP hyperparSEXP, SEXP KSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(models_dens_MvT_v2(data, priors, coords, hyperpar, K));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_weights_MvT_v2
+List BPS_weights_MvT_v2(const List& data, const List& priors, const arma::mat& coords, const List& hyperpar, int K);
+RcppExport SEXP _spBPS_BPS_weights_MvT_v2(SEXP dataSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP hyperparSEXP, SEXP KSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_weights_MvT_v2(data, priors, coords, hyperpar, K));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_combine_v2
+List BPS_combine_v2(const List& fit_list, const int K, const double rp);
+RcppExport SEXP _spBPS_BPS_combine_v2(SEXP fit_listSEXP, SEXP KSEXP, SEXP rpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type fit_list(fit_listSEXP);
+    Rcpp::traits::input_parameter< const int >::type K(KSEXP);
+    Rcpp::traits::input_parameter< const double >::type rp(rpSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_combine_v2(fit_list, K, rp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_all_local_weights_v2
+List compute_all_local_weights_v2(const List& Y_list, const List& X_list, const List& crd_list, const List& priors, const List& hyperpar, int cv_folds, int n_cores);
+RcppExport SEXP _spBPS_compute_all_local_weights_v2(SEXP Y_listSEXP, SEXP X_listSEXP, SEXP crd_listSEXP, SEXP priorsSEXP, SEXP hyperparSEXP, SEXP cv_foldsSEXP, SEXP n_coresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Y_list(Y_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type X_list(X_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type crd_list(crd_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type cv_folds(cv_foldsSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_all_local_weights_v2(Y_list, X_list, crd_list, priors, hyperpar, cv_folds, n_cores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_post_MvT_v2
+List BPS_post_MvT_v2(const List& data, const arma::mat& X_u, const List& priors, const arma::mat& coords, const arma::mat& crd_u, const List& hyperpar, const arma::vec& W, const int R, const arma::mat& d_u, const List& Rphi_u_list, int n_cores);
+RcppExport SEXP _spBPS_BPS_post_MvT_v2(SEXP dataSEXP, SEXP X_uSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP crd_uSEXP, SEXP hyperparSEXP, SEXP WSEXP, SEXP RSEXP, SEXP d_uSEXP, SEXP Rphi_u_listSEXP, SEXP n_coresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X_u(X_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type crd_u(crd_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type W(WSEXP);
+    Rcpp::traits::input_parameter< const int >::type R(RSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type d_u(d_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Rphi_u_list(Rphi_u_listSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_post_MvT_v2(data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_post_MvT_v2_batch
+List BPS_post_MvT_v2_batch(const List& data, const arma::mat& X_u, const List& priors, const arma::mat& coords, const arma::mat& crd_u, const List& hyperpar, const arma::vec& W, const int R, const arma::mat& d_u, const List& Rphi_u_list, int n_cores, int pred_batch_size);
+RcppExport SEXP _spBPS_BPS_post_MvT_v2_batch(SEXP dataSEXP, SEXP X_uSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP crd_uSEXP, SEXP hyperparSEXP, SEXP WSEXP, SEXP RSEXP, SEXP d_uSEXP, SEXP Rphi_u_listSEXP, SEXP n_coresSEXP, SEXP pred_batch_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X_u(X_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type crd_u(crd_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type W(WSEXP);
+    Rcpp::traits::input_parameter< const int >::type R(RSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type d_u(d_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Rphi_u_list(Rphi_u_listSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    Rcpp::traits::input_parameter< int >::type pred_batch_size(pred_batch_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_post_MvT_v2_batch(data, X_u, priors, coords, crd_u, hyperpar, W, R, d_u, Rphi_u_list, n_cores, pred_batch_size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_pred_all_subsets_v2
+List BPS_pred_all_subsets_v2(const List& Y_list, const List& X_list, const List& crd_list, const List& W_local_list, const arma::uvec& subset_ind, const arma::mat& d_u, const List& Rphi_u_list, const arma::mat& X_u, const arma::mat& crd_u, const List& priors, const List& hyperpar, int pred_batch_size, int n_cores);
+RcppExport SEXP _spBPS_BPS_pred_all_subsets_v2(SEXP Y_listSEXP, SEXP X_listSEXP, SEXP crd_listSEXP, SEXP W_local_listSEXP, SEXP subset_indSEXP, SEXP d_uSEXP, SEXP Rphi_u_listSEXP, SEXP X_uSEXP, SEXP crd_uSEXP, SEXP priorsSEXP, SEXP hyperparSEXP, SEXP pred_batch_sizeSEXP, SEXP n_coresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type Y_list(Y_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type X_list(X_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type crd_list(crd_listSEXP);
+    Rcpp::traits::input_parameter< const List& >::type W_local_list(W_local_listSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type subset_ind(subset_indSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type d_u(d_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type Rphi_u_list(Rphi_u_listSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X_u(X_uSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type crd_u(crd_uSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< int >::type pred_batch_size(pred_batch_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_pred_all_subsets_v2(Y_list, X_list, crd_list, W_local_list, subset_ind, d_u, Rphi_u_list, X_u, crd_u, priors, hyperpar, pred_batch_size, n_cores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_postdraws_MvT_v2
+List BPS_postdraws_MvT_v2(const List& data, const List& priors, const arma::mat& coords, const List& hyperpar, const arma::vec& W, const int R, bool par);
+RcppExport SEXP _spBPS_BPS_postdraws_MvT_v2(SEXP dataSEXP, SEXP priorsSEXP, SEXP coordsSEXP, SEXP hyperparSEXP, SEXP WSEXP, SEXP RSEXP, SEXP parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const List& >::type priors(priorsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type hyperpar(hyperparSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type W(WSEXP);
+    Rcpp::traits::input_parameter< const int >::type R(RSEXP);
+    Rcpp::traits::input_parameter< bool >::type par(parSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_postdraws_MvT_v2(data, priors, coords, hyperpar, W, R, par));
+    return rcpp_result_gen;
+END_RCPP
+}
+// BPS_PseudoBMA_v2
+List BPS_PseudoBMA_v2(const List& fit_list, int n_cores);
+RcppExport SEXP _spBPS_BPS_PseudoBMA_v2(SEXP fit_listSEXP, SEXP n_coresSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type fit_list(fit_listSEXP);
+    Rcpp::traits::input_parameter< int >::type n_cores(n_coresSEXP);
+    rcpp_result_gen = Rcpp::wrap(BPS_PseudoBMA_v2(fit_list, n_cores));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dmatrix_t_test
+double dmatrix_t_test(const arma::mat& X, const arma::mat& Lambda, const arma::mat& SigmaR, const arma::mat& SigmaC, double nu, bool log_d);
+RcppExport SEXP _spBPS_dmatrix_t_test(SEXP XSEXP, SEXP LambdaSEXP, SEXP SigmaRSEXP, SEXP SigmaCSEXP, SEXP nuSEXP, SEXP log_dSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Lambda(LambdaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type SigmaR(SigmaRSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type SigmaC(SigmaCSEXP);
+    Rcpp::traits::input_parameter< double >::type nu(nuSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_d(log_dSEXP);
+    rcpp_result_gen = Rcpp::wrap(dmatrix_t_test(X, Lambda, SigmaR, SigmaC, nu, log_d));
+    return rcpp_result_gen;
+END_RCPP
+}
 // arma_dist
 arma::mat arma_dist(const arma::mat& X);
 RcppExport SEXP _spBPS_arma_dist(SEXP XSEXP) {
@@ -332,6 +606,22 @@ static const R_CallMethodDef CallEntries[] = {
     {"_spBPS_BPS_pred_MvT", (DL_FUNC) &_spBPS_BPS_pred_MvT, 8},
     {"_spBPS_BPS_post_MvT", (DL_FUNC) &_spBPS_BPS_post_MvT, 8},
     {"_spBPS_BPS_postdraws_MvT", (DL_FUNC) &_spBPS_BPS_postdraws_MvT, 7},
+    {"_spBPS_BPS_post_all_subsets_v2", (DL_FUNC) &_spBPS_BPS_post_all_subsets_v2, 8},
+    {"_spBPS_BPS_pred_streaming_v2", (DL_FUNC) &_spBPS_BPS_pred_streaming_v2, 14},
+    {"_spBPS_fit_cpp_MvT_v2", (DL_FUNC) &_spBPS_fit_cpp_MvT_v2, 5},
+    {"_spBPS_post_draws_MvT_v2", (DL_FUNC) &_spBPS_post_draws_MvT_v2, 4},
+    {"_spBPS_d_pred_cpp_MvT_v2", (DL_FUNC) &_spBPS_d_pred_cpp_MvT_v2, 7},
+    {"_spBPS_dens_kcv_MvT_v2", (DL_FUNC) &_spBPS_dens_kcv_MvT_v2, 5},
+    {"_spBPS_models_dens_MvT_v2", (DL_FUNC) &_spBPS_models_dens_MvT_v2, 5},
+    {"_spBPS_BPS_weights_MvT_v2", (DL_FUNC) &_spBPS_BPS_weights_MvT_v2, 5},
+    {"_spBPS_BPS_combine_v2", (DL_FUNC) &_spBPS_BPS_combine_v2, 3},
+    {"_spBPS_compute_all_local_weights_v2", (DL_FUNC) &_spBPS_compute_all_local_weights_v2, 7},
+    {"_spBPS_BPS_post_MvT_v2", (DL_FUNC) &_spBPS_BPS_post_MvT_v2, 11},
+    {"_spBPS_BPS_post_MvT_v2_batch", (DL_FUNC) &_spBPS_BPS_post_MvT_v2_batch, 12},
+    {"_spBPS_BPS_pred_all_subsets_v2", (DL_FUNC) &_spBPS_BPS_pred_all_subsets_v2, 13},
+    {"_spBPS_BPS_postdraws_MvT_v2", (DL_FUNC) &_spBPS_BPS_postdraws_MvT_v2, 7},
+    {"_spBPS_BPS_PseudoBMA_v2", (DL_FUNC) &_spBPS_BPS_PseudoBMA_v2, 2},
+    {"_spBPS_dmatrix_t_test", (DL_FUNC) &_spBPS_dmatrix_t_test, 6},
     {"_spBPS_arma_dist", (DL_FUNC) &_spBPS_arma_dist, 1},
     {"_spBPS_expand_grid_cpp", (DL_FUNC) &_spBPS_expand_grid_cpp, 2},
     {"_spBPS_sample_index", (DL_FUNC) &_spBPS_sample_index, 3},

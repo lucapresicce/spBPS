@@ -36,6 +36,9 @@ arma::vec dirichlet_sample(const arma::vec& alpha);
 
 arma::uvec sample_indices(std::size_t size, std::size_t n_draws, const arma::vec& prob, bool replace = true);
 
+// Thread-safe normal matrix generator (uses thread_local engine — safe in OMP)
+arma::mat normal_matrix(arma::uword n_rows, arma::uword n_cols);
+
 arma::mat inverse_wishart(double df, const arma::mat& scale);
 
 arma::mat matrix_normal(const arma::mat& mean,

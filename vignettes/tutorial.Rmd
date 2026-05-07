@@ -92,7 +92,7 @@ hyperpar <- list(alpha = alfa_seq, phi = phi_seq)
 ### Setting dimensions
 ```{r, results=F}
 # subset dimension
-subset_size <- 500
+subset_size <- 100
 
 # number of posterior draws
 R <- 200
@@ -112,13 +112,13 @@ out <- spBPS(data = list(Y = Y, X = X),
       combine_method = "bps",
       draws = R,
       newdata = list(X = X_u, coords = crd_u),
-      cores = n_core)
+      n_cores = n_core)
 ```
 
 ### Results collection
 ```{r}
 # statistics computations W
-pred_mat_W <- do.call(abind, c(lapply(out$predictive, function(x) x$Wu), along = 3))
+pred_mat_W <- out$predictive$Wu
 post_mean_W <- apply(pred_mat_W, c(1,2), mean)
 post_qnt_W <- apply(pred_mat_W, c(1,2), quantile, c(0.025, 0.975))
 
@@ -127,7 +127,7 @@ coverage_W <- mean(W_u >= post_qnt_W[1,,1] & W_u <= post_qnt_W[2,,1])
 cat("Empirical coverage for Spatial process:", round(coverage_W, 3),"\n")
 
 # statistics computations Y
-pred_mat_Y <- do.call(abind, c(lapply(out$predictive, function(x) x$Yu), along = 3))
+pred_mat_Y <- out$predictive$Yu
 post_mean_Y <- apply(pred_mat_Y, c(1,2), mean)
 post_qnt_Y <- apply(pred_mat_Y, c(1,2), quantile, c(0.025, 0.975))
 
@@ -230,6 +230,8 @@ image.plot(iyp, add=TRUE, col=rev(col.pal(length(surf.brks)-1)), zlim=zlimp)
 
 par(oldpar)
 ```
+
+
 ------
 
 

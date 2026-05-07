@@ -57,20 +57,19 @@ utils::globalVariables("i")
 #'
 #' }
 #'
-#' @export
-spBPS <- function(data,
-                  priors,
-                  coords,
-                  hyperpar,
-                  subset_size = 500L,
-                  K = NULL,
-                  cv_folds = 5L,
-                  rp = 1,
-                  combine_method = c("bps", "pseudoBMA"),
-                  draws = 0L,
-                  newdata = NULL,
-                  include_latent = FALSE,
-                  cores = NULL) {
+spBPS_old <- function(data,
+                      priors,
+                      coords,
+                      hyperpar,
+                      subset_size = 500L,
+                      K = NULL,
+                      cv_folds = 5L,
+                      rp = 1,
+                      combine_method = c("bps", "pseudoBMA"),
+                      draws = 0L,
+                      newdata = NULL,
+                      include_latent = FALSE,
+                      cores = NULL) {
 
   cat("\n====================================================\n")
   cat("         Welcome to spBPS Bayesian Engine\n")
